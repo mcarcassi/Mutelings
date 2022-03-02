@@ -14,16 +14,16 @@ namespace Assets.GameLogic
 
         }
 
-        public void addObject(TileObject anObject)
+        public void AddObject(TileObject anObject)
         {
-            if (!canAddObject(anObject))
+            if (!CanAddObject(anObject))
             {
                 throw new ArgumentException("Cannot add object " + anObject + " to the tile " + this);
             }
             objects.Add(anObject);
         }
 
-        public bool canAddObject(TileObject anObject)
+        public bool CanAddObject(TileObject anObject)
         {
             // TODO: consistency checks
             return true;

@@ -19,7 +19,7 @@ namespace Assets.GameLogic
                 {
                     if (rand.Next(0, 4) == 0)
                     {
-                        world.GetTileAt(x, y).addObject(new Plant());
+                        world.GetTileAt(x, y).AddObject(new Plant());
                     }
                 }
             }
