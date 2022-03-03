@@ -25,8 +25,32 @@ namespace Assets.GameLogic
 
         public bool CanAddObject(TileObject anObject)
         {
+            bool canAddPlant = true;
+            bool canAddMuteling = true;
             // TODO: consistency checks
-            return true;
+            foreach(TileObject obj in objects)
+            {
+                if(obj is Plant)
+                {
+                    canAddPlant = false;
+                }
+                if(obj is Muteling)
+                {
+                    canAddMuteling = false;
+                }
+            }
+            if(anObject is Plant)
+            {
+                return canAddPlant;
+            }
+            else if(anObject is Muteling)
+            {
+                return canAddMuteling;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public List<TileObject> GetTileObjects()
