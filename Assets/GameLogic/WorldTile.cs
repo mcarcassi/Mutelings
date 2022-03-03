@@ -27,23 +27,21 @@ namespace Assets.GameLogic
         {
             bool canAddPlant = true;
             bool canAddMuteling = true;
-            // TODO: consistency checks
-            foreach(TileObject obj in objects)
+
+            if (this.ContainsPlant())
             {
-                if(obj is Plant)
-                {
-                    canAddPlant = false;
-                }
-                if(obj is Muteling)
-                {
-                    canAddMuteling = false;
-                }
+                canAddPlant = false;
             }
-            if(anObject is Plant)
+            if (this.ContainsMuteling())
+            {
+                canAddMuteling = false;
+            }
+
+            if (anObject is Plant)
             {
                 return canAddPlant;
             }
-            else if(anObject is Muteling)
+            else if (anObject is Muteling)
             {
                 return canAddMuteling;
             }
@@ -51,6 +49,62 @@ namespace Assets.GameLogic
             {
                 return true;
             }
+        }
+
+        public void RemoveObject(String str)
+        {
+            str = str.ToLower();
+            if (str.Equals("plant"))
+            {
+                for(int i = 0; i < objects.Count; i++)
+                {
+                    if (objects[i] is Plant)
+                    {
+                        objects.RemoveAt(i);
+                    }
+                }
+            }
+            if (str.Equals("muteling"))
+            {
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    if (objects[i] is Muteling)
+                    {
+                        objects.RemoveAt(i);
+                    }
+                }
+            }
+        }
+
+        public void RemoveAllObjects()
+        {
+            foreach(TileObject obj in objects)
+            {
+                objects.Remove(obj);
+            }
+        }
+
+        public bool ContainsPlant()
+        {
+            foreach (TileObject obj in objects)
+            {
+                if (obj is Plant)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool ContainsMuteling()
+        {
+            foreach (TileObject obj in objects)
+            {
+                if (obj is Muteling)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<TileObject> GetTileObjects()
