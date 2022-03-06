@@ -17,9 +17,13 @@ namespace Assets.GameLogic
             {
                 for (int y = 0; y < ySize; y++)
                 {
-                    if (rand.Next(0, 4) == 0)
+                    int terrainId = rand.Next(0, Library.Instance.TerrainTypes.Count);
+                    world.GetTileAt(x, y).TerrainType = Library.Instance.TerrainTypes[terrainId];
+
+                    Plant plant = new Plant();
+                    if (world.GetTileAt(x, y).CanAddObject(plant) && rand.Next(0, 4) == 0)
                     {
-                        world.GetTileAt(x, y).AddObject(new Plant());
+                        world.GetTileAt(x, y).AddObject(plant);
                     }
                 }
             }

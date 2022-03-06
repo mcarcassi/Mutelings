@@ -8,10 +8,12 @@ namespace Assets.GameLogic
 {
     public class WorldTile
     {
+        public TerrainType TerrainType { get; set; }
         private List<TileObject> objects = new List<TileObject>();
+
         public WorldTile()
         {
-
+            TerrainType = Library.Instance.DefaultTerrainType;
         }
 
         public void AddObject(TileObject anObject)
@@ -25,6 +27,7 @@ namespace Assets.GameLogic
 
         public bool CanAddObject(TileObject anObject)
         {
+            // TODO: should also have a CanAddObject that takes a type
             bool canAddPlant = true;
             bool canAddMuteling = true;
 
@@ -39,6 +42,10 @@ namespace Assets.GameLogic
 
             if (anObject is Plant)
             {
+                if (!TerrainType.CanHavePlant)
+                {
+                    return false;
+                }
                 return canAddPlant;
             }
             else if (anObject is Muteling)
@@ -76,12 +83,39 @@ namespace Assets.GameLogic
             }
         }
 
+        public bool RemoveObject(TileObject obj)
+        {
+            return objects.Remove(obj);
+        }
+
+        public bool RemoveAllObjects(Type type)
+        {
+            bool removed = false;
+            foreach (TileObject obj in objects)
+            {
+                if (obj.GetType() == type)
+                {
+                    removed = objects.Remove(obj);
+                }
+            }
+            return removed;
+        }
+
         public void RemoveAllObjects()
         {
             foreach(TileObject obj in objects)
             {
                 objects.Remove(obj);
             }
+        }
+
+        public bool Contains(TileObject anObject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(Type type)  {
+            throw new NotImplementedException();
         }
 
         public bool ContainsPlant()

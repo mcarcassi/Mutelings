@@ -23,10 +23,11 @@ public class TileAutomata : MonoBehaviour
     private World world;
     public Vector3Int tmapSize;
 
-    public Tilemap topMap;
-    public Tilemap botMap;
-    public Tile topTile;
-    public Tile botTile;
+    public Tilemap plantMap;
+    public Tilemap terrainMap;
+    public Tile plantTile;
+    public Tile grassTile;
+    public Tile waterTile;
 
     int width;
     int height;
@@ -44,12 +45,18 @@ public class TileAutomata : MonoBehaviour
             for(int y = 0; y < height; y++)
             {
                 WorldTile currentTile = world.GetTileAt(x, y);
-                botMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), botTile);
+                if (currentTile.TerrainType.Name.Equals("Grassland"))
+                {
+                    terrainMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), grassTile);
+                } else
+                {
+                    terrainMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), waterTile);
+                }
                 foreach (var tileObject in currentTile.GetTileObjects())
                 {
                     if (tileObject is Plant)
                     {
-                        topMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), topTile);
+                        plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plantTile);
                     }
                 }
             }
@@ -134,8 +141,8 @@ public class TileAutomata : MonoBehaviour
 
     public void clearMap(bool complete)
     {
-        topMap.ClearAllTiles();
-        botMap.ClearAllTiles();
+        plantMap.ClearAllTiles();
+        terrainMap.ClearAllTiles();
 
     }
 }

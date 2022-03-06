@@ -15,10 +15,12 @@ public class WorldTileTest
     [Test]
     public void CanAddObjectTest()
     {
+        //TODO: The object added should be the same as the one tested to be added
         WorldTile newSampleTile = new WorldTile();
-        Assert.IsTrue(newSampleTile.CanAddObject(new Plant()));
+        Plant newPlant = new Plant();
+        Assert.IsTrue(newSampleTile.CanAddObject(newPlant));
 
-        newSampleTile.AddObject(new Plant());
+        newSampleTile.AddObject(newPlant);
         Assert.IsFalse(newSampleTile.CanAddObject(new Plant()));
         Assert.IsTrue(newSampleTile.CanAddObject(new Muteling()));
 
@@ -32,7 +34,6 @@ public class WorldTileTest
     public void AddObjectTest()
     {
         WorldTile sampleTile = new WorldTile();
-        sampleTile.RemoveAllObjects();
         sampleTile.AddObject(new Plant());
         Assert.IsTrue(sampleTile.GetTileObjects()[0] is Plant);
         Assert.Throws<ArgumentException>(() => sampleTile.AddObject(new Plant()));
@@ -42,11 +43,12 @@ public class WorldTileTest
     public void RemoveObjectTest()
     {
         WorldTile sampleTile = new WorldTile();
-        sampleTile.RemoveAllObjects();
         //Basic Check
+        Muteling mute1 = new Muteling();
         sampleTile.AddObject(new Plant());
-        sampleTile.AddObject(new Muteling());
-        sampleTile.RemoveObject("Muteling");
+        sampleTile.AddObject(mute1);
+        sampleTile.RemoveObject(mute1);
+        //sampleTile.RemoveAllObjects(typeof(Plant));
         Assert.IsFalse(sampleTile.ContainsMuteling());
         Assert.IsTrue(sampleTile.ContainsPlant());
         sampleTile.RemoveObject("Plant");

@@ -7,11 +7,11 @@ using UnityEngine.TestTools;
 
 public class WorldTest
 {
-    World world = new World(50, 75);
     // A Test behaves as an ordinary method
     [Test]
     public void WorldGetSizeTest()
     {
+        World world = new World(50, 75);
         // Use the Assert class to test conditions
         Assert.AreEqual(50, world.GetXSize());
         Assert.AreEqual(75, world.GetYSize());
