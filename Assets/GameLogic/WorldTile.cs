@@ -27,7 +27,6 @@ namespace Assets.GameLogic
 
         public bool CanAddObject(TileObject anObject)
         {
-            // TODO: should also have a CanAddObject that takes a type
             bool canAddPlant = true;
             bool canAddMuteling = true;
 
@@ -58,30 +57,38 @@ namespace Assets.GameLogic
             }
         }
 
-        public void RemoveObject(String str)
+        public bool CanAddObject(Type type)
         {
-            str = str.ToLower();
-            if (str.Equals("plant"))
+            bool canAddPlant = true;
+            bool canAddMuteling = true;
+
+            if (this.Contains(typeof(Plant)))
             {
-                for(int i = 0; i < objects.Count; i++)
-                {
-                    if (objects[i] is Plant)
-                    {
-                        objects.RemoveAt(i);
-                    }
-                }
+                canAddPlant = false;
             }
-            if (str.Equals("muteling"))
+            if (this.Contains(typeof(Muteling)))
             {
-                for (int i = 0; i < objects.Count; i++)
+                canAddMuteling = false;
+            }
+
+            if (type == typeof(Plant))
+            {
+                if (!TerrainType.CanHavePlant)
                 {
-                    if (objects[i] is Muteling)
-                    {
-                        objects.RemoveAt(i);
-                    }
+                    return false;
                 }
+                return canAddPlant;
+            }
+            else if (type == typeof(Muteling))
+            {
+                return canAddMuteling;
+            }
+            else
+            {
+                return true;
             }
         }
+
 
         public bool RemoveObject(TileObject obj)
         {
@@ -111,7 +118,6 @@ namespace Assets.GameLogic
             }
         }
 
-        //TODO: Make Test
         public bool Contains(TileObject anObject)
         {
             foreach (TileObject obj in objects)
@@ -124,7 +130,6 @@ namespace Assets.GameLogic
             return false;
         }
 
-        //TODO: Make Test
         public bool Contains(Type type)  {
 
             foreach (TileObject obj in objects)
