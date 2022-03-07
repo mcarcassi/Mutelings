@@ -35,8 +35,9 @@ public class WorldTileTest
     public void AddObjectTest()
     {
         WorldTile sampleTile = new WorldTile();
-        sampleTile.AddObject(new Plant());
-        Assert.IsTrue(sampleTile.GetTileObjects()[0] is Plant);
+        Plant newPlant = new Plant();
+        sampleTile.AddObject(newPlant);
+        Assert.IsTrue(sampleTile.GetTileObjects()[0] == newPlant);
         Assert.Throws<ArgumentException>(() => sampleTile.AddObject(new Plant()));
     }
 
