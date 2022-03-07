@@ -23,9 +23,9 @@ public class WorldTileTest
         newSampleTile.AddObject(newPlant);
         Assert.IsFalse(newSampleTile.CanAddObject(new Plant()));
 
-        Muteling mute1 = new Muteling();
-        Assert.IsTrue(newSampleTile.CanAddObject(mute1));
-        newSampleTile.AddObject(mute1);
+        Muteling newMute = new Muteling();
+        Assert.IsTrue(newSampleTile.CanAddObject(newMute));
+        newSampleTile.AddObject(newMute);
         Assert.IsFalse(newSampleTile.CanAddObject(new Muteling()));
 
 
@@ -42,28 +42,23 @@ public class WorldTileTest
     }
 
     [Test]
-    public void RemoveObjectTest()
+    public void RemoveSpecificObjectTest()
     {
         WorldTile sampleTile = new WorldTile();
         //Basic Check
-        Muteling mute1 = new Muteling();
-        sampleTile.AddObject(new Plant());
-        sampleTile.AddObject(mute1);
-        sampleTile.RemoveObject(mute1);
-        //sampleTile.RemoveAllObjects(typeof(Plant));
-        Assert.IsFalse(sampleTile.Contains(typeof(Muteling)));
-        Assert.IsTrue(sampleTile.Contains(typeof(Plant)));
-        sampleTile.RemoveObject("Plant");
+        Muteling newMute = new Muteling();
+        Plant newPlant = new Plant();
+        sampleTile.AddObject(newPlant);
+        sampleTile.AddObject(newMute);
+        Assert.IsTrue(sampleTile.RemoveObject(newMute));
+        Assert.IsFalse(sampleTile.Contains(newMute));
+        Assert.IsTrue(sampleTile.Contains(newPlant));
+        Assert.IsTrue(sampleTile.RemoveObject(newPlant));
         Assert.IsFalse(sampleTile.Contains(typeof(Plant)));
 
-        //Cap and Order Check
-        sampleTile.AddObject(new Muteling());
-        sampleTile.AddObject(new Plant());
-        sampleTile.RemoveObject("PLaNt");
-        Assert.IsTrue(sampleTile.Contains(typeof(Muteling)));
-        Assert.IsFalse(sampleTile.Contains(typeof(Plant)));
-        sampleTile.RemoveObject("mUteLinG");
-        Assert.IsFalse(sampleTile.Contains(typeof(Muteling)));
+        Assert.IsFalse(sampleTile.RemoveObject(newPlant));
 
     }
+
+    //sampleTile.RemoveAllObjects(typeof(Plant));
 }
