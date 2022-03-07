@@ -22,9 +22,10 @@ public class WorldTileTest
 
         newSampleTile.AddObject(newPlant);
         Assert.IsFalse(newSampleTile.CanAddObject(new Plant()));
-        Assert.IsTrue(newSampleTile.CanAddObject(new Muteling()));
 
-        newSampleTile.AddObject(new Muteling());
+        Muteling mute1 = new Muteling();
+        Assert.IsTrue(newSampleTile.CanAddObject(mute1));
+        newSampleTile.AddObject(mute1);
         Assert.IsFalse(newSampleTile.CanAddObject(new Muteling()));
 
 
