@@ -42,6 +42,24 @@ public class WorldTileTest
     }
 
     [Test]
+    public void ContainsTest()
+    {
+        WorldTile sampleTile = new WorldTile();
+        Plant plant1 = new Plant();
+        Plant plant2 = new Plant();
+        Assert.IsFalse(sampleTile.Contains(plant1));
+
+        sampleTile.AddObject(plant1);
+        Assert.IsTrue(sampleTile.Contains(plant1));
+        Assert.IsFalse(sampleTile.Contains(plant2));
+
+        Assert.IsTrue(sampleTile.Contains(typeof(Plant)));
+        Assert.IsFalse(sampleTile.Contains(typeof(Muteling)));
+        sampleTile.AddObject(new Muteling());
+        Assert.IsTrue(sampleTile.Contains(typeof(Muteling)));
+    }
+
+    [Test]
     public void RemoveSpecificObjectTest()
     {
         WorldTile sampleTile = new WorldTile();
