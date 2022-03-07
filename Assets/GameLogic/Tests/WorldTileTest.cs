@@ -51,19 +51,19 @@ public class WorldTileTest
         sampleTile.AddObject(mute1);
         sampleTile.RemoveObject(mute1);
         //sampleTile.RemoveAllObjects(typeof(Plant));
-        Assert.IsFalse(sampleTile.ContainsMuteling());
-        Assert.IsTrue(sampleTile.ContainsPlant());
+        Assert.IsFalse(sampleTile.Contains(typeof(Muteling)));
+        Assert.IsTrue(sampleTile.Contains(typeof(Plant)));
         sampleTile.RemoveObject("Plant");
-        Assert.IsFalse(sampleTile.ContainsPlant());
+        Assert.IsFalse(sampleTile.Contains(typeof(Plant)));
 
         //Cap and Order Check
         sampleTile.AddObject(new Muteling());
         sampleTile.AddObject(new Plant());
         sampleTile.RemoveObject("PLaNt");
-        Assert.IsTrue(sampleTile.ContainsMuteling());
-        Assert.IsFalse(sampleTile.ContainsPlant());
+        Assert.IsTrue(sampleTile.Contains(typeof(Muteling)));
+        Assert.IsFalse(sampleTile.Contains(typeof(Plant)));
         sampleTile.RemoveObject("mUteLinG");
-        Assert.IsFalse(sampleTile.ContainsMuteling());
+        Assert.IsFalse(sampleTile.Contains(typeof(Muteling)));
 
     }
 }

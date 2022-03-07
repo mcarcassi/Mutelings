@@ -31,11 +31,11 @@ namespace Assets.GameLogic
             bool canAddPlant = true;
             bool canAddMuteling = true;
 
-            if (this.ContainsPlant())
+            if (this.Contains(typeof(Plant)))
             {
                 canAddPlant = false;
             }
-            if (this.ContainsMuteling())
+            if (this.Contains(typeof(Muteling)))
             {
                 canAddMuteling = false;
             }
@@ -88,6 +88,7 @@ namespace Assets.GameLogic
             return objects.Remove(obj);
         }
 
+        //TODO: Make Test
         public bool RemoveAllObjects(Type type)
         {
             bool removed = false;
@@ -101,6 +102,7 @@ namespace Assets.GameLogic
             return removed;
         }
 
+        //TODO: Make Test
         public void RemoveAllObjects()
         {
             foreach(TileObject obj in objects)
@@ -109,31 +111,25 @@ namespace Assets.GameLogic
             }
         }
 
+        //TODO: Make Test
         public bool Contains(TileObject anObject)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(Type type)  {
-            throw new NotImplementedException();
-        }
-
-        public bool ContainsPlant()
         {
             foreach (TileObject obj in objects)
             {
-                if (obj is Plant)
+                if(obj == anObject)
                 {
                     return true;
                 }
             }
             return false;
         }
-        public bool ContainsMuteling()
-        {
+
+        //TODO: Make Test
+        public bool Contains(Type type)  {
+
             foreach (TileObject obj in objects)
             {
-                if (obj is Muteling)
+                if (obj.GetType() == type)
                 {
                     return true;
                 }
