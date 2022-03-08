@@ -8,15 +8,15 @@ namespace Assets.GameLogic
 {
     public class World
     {
-        private int xSize;
-        private int ySize;
-        private WorldTile[,] tiles;
+        private int XSize { get; }
+        private int YSize { get; }
+        private WorldTile[,] tiles { get; }
 
         public World(int xSize, int ySize)
         {
-            this.xSize = xSize;
-            this.ySize = ySize;
-            tiles = new WorldTile[xSize,ySize];
+            XSize = xSize;
+            YSize = ySize;
+            tiles = new WorldTile[xSize, ySize];
             for (int x = 0; x < xSize; x++)
             {
                 for (int y = 0; y < ySize; y++)
@@ -28,16 +28,17 @@ namespace Assets.GameLogic
 
         public int GetXSize()
         {
-            return xSize;
+            return XSize;
         }
 
         public int GetYSize()
         {
-            return ySize;
+            return YSize;
         }
         public WorldTile GetTileAt(int x, int y)
         {
             return tiles[x, y];
         }
     }
+    
 }

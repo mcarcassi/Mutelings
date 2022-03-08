@@ -13,8 +13,8 @@ public class WorldTest
     {
         World world = new World(50, 75);
         // Use the Assert class to test conditions
-        Assert.AreEqual(50, world.GetXSize());
-        Assert.AreEqual(75, world.GetYSize());
+        Assert.AreEqual(50, world.XSize);
+        Assert.AreEqual(75, world.YSize);
     }
 
 
