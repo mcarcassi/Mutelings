@@ -112,7 +112,7 @@ namespace Assets.GameLogic
         //TODO: Make Test
         public void RemoveAllObjects()
         {
-            foreach(TileObject obj in objects)
+            foreach (TileObject obj in objects.ToList())
             {
                 objects.Remove(obj);
             }

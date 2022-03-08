@@ -63,7 +63,6 @@ public class WorldTileTest
     public void RemoveSpecificObjectTest()
     {
         WorldTile sampleTile = new WorldTile();
-        //Basic Check
         Muteling newMute = new Muteling();
         Plant newPlant = new Plant();
         sampleTile.AddObject(newPlant);
@@ -78,5 +77,25 @@ public class WorldTileTest
 
     }
 
-    //sampleTile.RemoveAllObjects(typeof(Plant));
+    [Test]
+    public void RemoveAllObjectsTest()
+    {
+        WorldTile sampleTile = new WorldTile();
+        Plant newPlant = new Plant();
+        Muteling newMuteling = new Muteling();
+        sampleTile.AddObject(newPlant);
+        sampleTile.AddObject(newMuteling);
+        sampleTile.RemoveAllObjects();
+        Assert.IsFalse(sampleTile.Contains(newPlant));
+        Assert.IsFalse(sampleTile.Contains(newMuteling));
+
+        sampleTile.AddObject(newPlant);
+        sampleTile.AddObject(newMuteling);
+        sampleTile.RemoveAllObjects(typeof(Plant));
+        Assert.IsFalse(sampleTile.Contains(newPlant));
+        Assert.IsTrue(sampleTile.Contains(newMuteling));
+
+    }
+
+
 }
