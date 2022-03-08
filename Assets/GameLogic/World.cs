@@ -8,9 +8,9 @@ namespace Assets.GameLogic
 {
     public class World
     {
-        private int XSize { get; }
-        private int YSize { get; }
-        private WorldTile[,] tiles { get; }
+        public int XSize { get; }
+        public int YSize { get; }
+        public WorldTile[,] tiles { get; }
 
         public World(int xSize, int ySize)
         {
@@ -26,15 +26,6 @@ namespace Assets.GameLogic
             }
         }
 
-        public int GetXSize()
-        {
-            return XSize;
-        }
-
-        public int GetYSize()
-        {
-            return YSize;
-        }
         public WorldTile GetTileAt(int x, int y)
         {
             return tiles[x, y];
