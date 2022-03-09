@@ -16,6 +16,11 @@ namespace Assets.GameLogic
             TerrainType = Library.Instance.DefaultTerrainType;
         }
 
+        /// <summary>
+        /// Method <c>AddObject</c> adds an tile object on the tile.
+        /// </summary>
+        /// <param name="anObject"> the new object being added.</param>
+        /// <exception cref="ArgumentException" thrown when object cannot be added.</exception>
         public void AddObject(TileObject anObject)
         {
             if (!CanAddObject(anObject))
@@ -25,6 +30,13 @@ namespace Assets.GameLogic
             objects.Add(anObject);
         }
 
+        /// <summary>
+        /// Method <c>CanAddObject</c> checks to see if object can be added.
+        /// </summary>
+        /// <param name="anObject"> the object to be checked.</param>
+        /// <returns>
+        /// True if object can be added and false otherwise.
+        /// </returns>
         public bool CanAddObject(TileObject anObject)
         {
             bool canAddPlant = true;
@@ -95,7 +107,7 @@ namespace Assets.GameLogic
             return objects.Remove(obj);
         }
 
-        //TODO: Make Test
+        //TODO: Debug and find issue
         public bool RemoveAllObjects(Type type)
         {
             bool removed = false;
@@ -109,10 +121,10 @@ namespace Assets.GameLogic
             return removed;
         }
 
-        //TODO: Make Test
+        //TODO: Debug and find issue
         public void RemoveAllObjects()
         {
-            foreach (TileObject obj in objects.ToList())
+            foreach (TileObject obj in objects)
             {
                 objects.Remove(obj);
             }

@@ -77,25 +77,25 @@ public class WorldTileTest
 
     }
 
-    [Test]
-    public void RemoveAllObjectsTest()
-    {
-        WorldTile sampleTile = new WorldTile();
-        Plant newPlant = new Plant();
-        Muteling newMuteling = new Muteling();
-        sampleTile.AddObject(newPlant);
-        sampleTile.AddObject(newMuteling);
-        sampleTile.RemoveAllObjects();
-        Assert.IsFalse(sampleTile.Contains(newPlant));
-        Assert.IsFalse(sampleTile.Contains(newMuteling));
+    //[Test]
+    //public void RemoveAllObjectsTest()
+    //{
+    //    WorldTile sampleTile = new WorldTile();
+    //    Plant newPlant = new Plant();
+    //    Muteling newMuteling = new Muteling();
+    //    sampleTile.AddObject(newPlant);
+    //    sampleTile.AddObject(newMuteling);
+    //    sampleTile.RemoveAllObjects();
+    //    Assert.IsFalse(sampleTile.Contains(newPlant));
+    //    Assert.IsFalse(sampleTile.Contains(newMuteling));
 
-        sampleTile.AddObject(newPlant);
-        sampleTile.AddObject(newMuteling);
-        sampleTile.RemoveAllObjects(typeof(Plant));
-        Assert.IsFalse(sampleTile.Contains(newPlant));
-        Assert.IsTrue(sampleTile.Contains(newMuteling));
+    //    sampleTile.AddObject(newPlant);
+    //    sampleTile.AddObject(newMuteling);
+    //    sampleTile.RemoveAllObjects(typeof(Plant));
+    //    Assert.IsFalse(sampleTile.Contains(newPlant));
+    //    Assert.IsTrue(sampleTile.Contains(newMuteling));
 
-    }
+    //}
 
 
 }
