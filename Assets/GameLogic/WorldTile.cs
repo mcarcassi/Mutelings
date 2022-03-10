@@ -14,7 +14,7 @@ namespace Assets.GameLogic
     public class WorldTile
     {
         public TerrainType TerrainType { get; set; }
-        private List<TileObject> objects = new List<TileObject>();
+        private List<TileObject> _objects = new List<TileObject>();
 
         /// <summary>
         /// Default constructor that creates a tile of default terrain type.
@@ -45,7 +45,7 @@ namespace Assets.GameLogic
             {
                 throw new ArgumentException("Cannot add object " + anObject + " to the tile " + this);
             }
-            objects.Add(anObject);
+            _objects.Add(anObject);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Assets.GameLogic
         /// </returns>
         public bool RemoveObject(TileObject obj)
         {
-            return objects.Remove(obj);
+            return _objects.Remove(obj);
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Assets.GameLogic
         /// </returns>
         public bool RemoveAllObjects(Type type)
         {
-            return objects.RemoveAll(x => x.GetType() == type) != 0;
+            return _objects.RemoveAll(x => x.GetType() == type) != 0;
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Assets.GameLogic
         /// </summary>
         public void RemoveAllObjects()
         {
-            objects.RemoveAll(x => true);
+            _objects.RemoveAll(x => true);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Assets.GameLogic
         /// </returns>
         public bool Contains(TileObject anObject)
         {
-            foreach (TileObject obj in objects)
+            foreach (TileObject obj in _objects)
             {
                 if(obj == anObject)
                 {
@@ -185,7 +185,7 @@ namespace Assets.GameLogic
         /// </returns>
         public bool Contains(Type type)  {
 
-            foreach (TileObject obj in objects)
+            foreach (TileObject obj in _objects)
             {
                 if (obj.GetType() == type)
                 {
@@ -201,7 +201,7 @@ namespace Assets.GameLogic
         /// <returns>A list with all the objects.</returns>
         public List<TileObject> GetTileObjects()
         {
-            return objects;
+            return _objects;
         }
     }
 }

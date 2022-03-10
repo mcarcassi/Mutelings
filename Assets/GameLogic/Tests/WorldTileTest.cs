@@ -15,7 +15,6 @@ public class WorldTileTest
     [Test]
     public void CanAddObjectTest()
     {
-        //TODO: The object added should be the same as the one tested to be added
         WorldTile newSampleTile = new WorldTile();
         Plant newPlant = new Plant();
         Assert.IsTrue(newSampleTile.CanAddObject(newPlant));

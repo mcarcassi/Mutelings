@@ -10,6 +10,7 @@ namespace Assets.GameLogic
     {
         public List<TerrainType> TerrainTypes { get; }
         public TerrainType DefaultTerrainType { get; }
+        public List<PlantType> PlantTypes { get;}
 
 
         public Library()
