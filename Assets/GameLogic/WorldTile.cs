@@ -110,24 +110,13 @@ namespace Assets.GameLogic
         //TODO: Debug and find issue
         public bool RemoveAllObjects(Type type)
         {
-            bool removed = false;
-            foreach (TileObject obj in objects)
-            {
-                if (obj.GetType() == type)
-                {
-                    removed = objects.Remove(obj);
-                }
-            }
-            return removed;
+            return objects.RemoveAll(x => x.GetType() == type) != 0;
         }
 
         //TODO: Debug and find issue
         public void RemoveAllObjects()
         {
-            foreach (TileObject obj in objects)
-            {
-                objects.Remove(obj);
-            }
+            objects.RemoveAll(x => true);
         }
 
         public bool Contains(TileObject anObject)
