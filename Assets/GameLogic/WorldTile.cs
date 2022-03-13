@@ -15,24 +15,55 @@ namespace Assets.GameLogic
     {
         public TerrainType TerrainType { get; set; }
         private List<TileObject> _objects = new List<TileObject>();
+        private World _world;
+        public int X { get; }
+        public int Y { get; }
 
         /// <summary>
         /// Default constructor that creates a tile of default terrain type.
         /// </summary>
-        public WorldTile()
+        public WorldTile(World world, int x, int y)
         {
+            _world = world;
+            X = x;
+            Y = y;
             TerrainType = Library.Instance.DefaultTerrainType;
         }
 
-        /// <summary>
-        /// Constructor that allows custom terrain type.
-        /// </summary>
-        /// <param name="terrainType">The type of terrain for the tile.</param>
-        public WorldTile(TerrainType terrainType)
+        public WorldTile()
         {
-            TerrainType = terrainType;
+            // TODO This needs to be removed
+            TerrainType = Library.Instance.DefaultTerrainType;
         }
 
+        ///// <summary>
+        ///// Constructor that allows custom terrain type.
+        ///// </summary>
+        ///// <param name="terrainType">The type of terrain for the tile.</param>
+        //public WorldTile(TerrainType terrainType)
+        //{
+        //    TerrainType = terrainType;
+        //}
+
+        public WorldTile GetNextTile(Direction dir)
+        {
+            switch(dir)
+            {
+                case Direction.E:
+                    return _world.GetTileAt(X + 1, Y);
+                case Direction.W:
+                    return _world.GetTileAt(X - 1, Y);
+                case Direction.NE:
+                    return _world.GetTileAt(X + (X % 2), Y + 1);
+                case Direction.SE:
+                    return _world.GetTileAt(X + (X % 2), Y - 1);
+                case Direction.NW:
+                    return _world.GetTileAt(X + (X % 2) - 1, Y + 1);
+                case Direction.SW:
+                    return _world.GetTileAt(X + (X % 2) - 1, Y - 1);
+            }
+            return null;
+        }
 
         /// <summary>
         /// Method <c>AddObject</c> adds an tile object on the tile.

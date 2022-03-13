@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assets.GameLogic
 {
-    public class Muteling : TileObject
+    public enum Direction
     {
-        public void AdvanceTime()
-        {
-        }
+        NE,E,SE,SW,W,NW
     }
 }

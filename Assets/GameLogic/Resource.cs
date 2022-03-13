@@ -7,6 +7,10 @@ namespace Assets.GameLogic
         public Resource()
         {
         }
+
+        public void AdvanceTime()
+        {
+        }
     }
 }
 

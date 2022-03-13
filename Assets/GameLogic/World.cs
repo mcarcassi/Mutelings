@@ -21,7 +21,7 @@ namespace Assets.GameLogic
             {
                 for (int y = 0; y < ySize; y++)
                 {
-                    tiles[x, y] = new WorldTile();
+                    tiles[x, y] = new WorldTile(this, x, y);
                 }
             }
         }
@@ -29,6 +29,23 @@ namespace Assets.GameLogic
         public WorldTile GetTileAt(int x, int y)
         {
             return tiles[x, y];
+        }
+
+        public void AdvanceTime()
+        {
+            List<TileObject> allObjects = new List<TileObject>();
+            foreach (WorldTile tile  in tiles)
+            {
+                allObjects.AddRange(tile.GetTileObjects());
+            }
+
+            // TODO: Decide order
+
+            // Call AdvanceTime on all objects
+            foreach (TileObject obj in allObjects)
+            {
+                obj.AdvanceTime();
+            }
         }
     }
     

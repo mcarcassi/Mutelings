@@ -8,6 +8,6 @@ namespace Assets.GameLogic
 {
     public interface TileObject
     {
-
+        public void AdvanceTime();
     }
 }

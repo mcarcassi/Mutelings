@@ -44,7 +44,7 @@ public class TileAutomata : MonoBehaviour
         {
             for(int y = 0; y < height; y++)
             {
-                WorldTile currentTile = world.GetTileAt(x, y);
+                WorldTile currentTile = world.GetTileAt(width - x - 1, height - y - 1);
                 if (currentTile.TerrainType.Name.Equals("Grassland"))
                 {
                     terrainMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), grassTile);

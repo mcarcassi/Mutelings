@@ -17,6 +17,13 @@ namespace Assets.GameLogic
             {
                 for (int y = 0; y < ySize; y++)
                 {
+                    if (x == 0 && y == 0)
+                    {
+                        world.GetTileAt(x, y).TerrainType = Library.Instance.DefaultTerrainType;
+                        world.GetTileAt(x, y).AddObject(new Plant());
+                        continue;
+                    }
+
                     int terrainId = rand.Next(0, Library.Instance.TerrainTypes.Count);
                     world.GetTileAt(x, y).TerrainType = Library.Instance.TerrainTypes[terrainId];
 
