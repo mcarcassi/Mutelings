@@ -77,6 +77,7 @@ namespace Assets.GameLogic
                 throw new ArgumentException("Cannot add object " + anObject + " to the tile " + this);
             }
             _objects.Add(anObject);
+            anObject.Position = this;
         }
 
         /// <summary>

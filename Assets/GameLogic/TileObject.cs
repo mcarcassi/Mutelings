@@ -6,8 +6,26 @@ using System.Threading.Tasks;
 
 namespace Assets.GameLogic
 {
-    public interface TileObject
+    public abstract class TileObject
     {
-        public void AdvanceTime();
+        private WorldTile _position;
+        public WorldTile Position
+        {
+            get => _position;
+            
+            set
+            {
+                if (_position != null)
+                {
+                    _position.RemoveObject(this);
+                }
+                _position = value;
+            }
+        }
+
+        public virtual void AdvanceTime()
+        {
+            // Does nothing
+        }
     }
 }

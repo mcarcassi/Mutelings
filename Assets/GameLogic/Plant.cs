@@ -9,9 +9,5 @@ namespace Assets.GameLogic
 
     public class Plant : TileObject
     {
-        public void AdvanceTime()
-        {
-
-        }
     }
 }

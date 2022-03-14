@@ -194,7 +194,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -321,11 +321,13 @@ MonoBehaviour:
   deathLimit: 2
   numR: 1
   tmapSize: {x: 120, y: 70, z: 0}
+  mutelingMap: {fileID: 91484146}
   plantMap: {fileID: 1680580313}
   terrainMap: {fileID: 1049840991}
   plantTile: {fileID: 11400000, guid: e5db6ead0917374499fa92fd0d347ab9, type: 2}
   grassTile: {fileID: 11400000, guid: a352ff91f17e6ba49b7985be5880bb6e, type: 2}
   waterTile: {fileID: 11400000, guid: 294b9e17cc978f44ea13e5ac192f92e3, type: 2}
+  mutelingTile: {fileID: 11400000, guid: 2c1d776ccfdd2824ca77e335885d9aa8, type: 2}
 --- !u!4 &791707838
 Transform:
   m_ObjectHideFlags: 0
@@ -612,7 +614,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

@@ -23,24 +23,29 @@ public class TileAutomata : MonoBehaviour
     private World world;
     public Vector3Int tmapSize;
 
+    public Tilemap mutelingMap;
     public Tilemap plantMap;
     public Tilemap terrainMap;
     public Tile plantTile;
     public Tile grassTile;
     public Tile waterTile;
+    public Tile mutelingTile;
 
     int width;
     int height;
 
-    public void doSim(int numR)
+    public void generateWorld()
     {
-        clearMap(false);
         width = tmapSize.x;
         height = tmapSize.y;
 
         world = WorldGenerator.GenerateRandomWorld(width, height);
+    }
 
-        for(int x = 0; x < width; x++)
+    public void updateWorld()
+    {
+        clearMap(false);
+        for (int x = 0; x < width; x++)
         {
             for(int y = 0; y < height; y++)
             {
@@ -57,6 +62,12 @@ public class TileAutomata : MonoBehaviour
                     if (tileObject is Plant)
                     {
                         plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plantTile);
+                        print("Found plant");
+                    }
+                    if (tileObject is Muteling)
+                    {
+                        mutelingMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), mutelingTile);
+                        print("Found muteling");
                     }
                 }
             }
@@ -128,13 +139,21 @@ public class TileAutomata : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (world == null)
+        {
+            generateWorld();
+            updateWorld();
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            doSim(numR);
+            world.AdvanceTime();
+            updateWorld();
         }
         if (Input.GetMouseButtonDown(1))
         {
             clearMap(true);
+            world = null;
         }
 
     }
@@ -143,6 +162,6 @@ public class TileAutomata : MonoBehaviour
     {
         plantMap.ClearAllTiles();
         terrainMap.ClearAllTiles();
-
+        mutelingMap.ClearAllTiles();
     }
 }

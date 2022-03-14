@@ -17,13 +17,6 @@ namespace Assets.GameLogic
             {
                 for (int y = 0; y < ySize; y++)
                 {
-                    if (x == 0 && y == 0)
-                    {
-                        world.GetTileAt(x, y).TerrainType = Library.Instance.DefaultTerrainType;
-                        world.GetTileAt(x, y).AddObject(new Plant());
-                        continue;
-                    }
-
                     int terrainId = rand.Next(0, Library.Instance.TerrainTypes.Count);
                     world.GetTileAt(x, y).TerrainType = Library.Instance.TerrainTypes[terrainId];
 
@@ -31,6 +24,12 @@ namespace Assets.GameLogic
                     if (world.GetTileAt(x, y).CanAddObject(plant) && rand.Next(0, 4) == 0)
                     {
                         world.GetTileAt(x, y).AddObject(plant);
+                    }
+
+                    Muteling muteling = new Muteling();
+                    if (world.GetTileAt(x, y).CanAddObject(muteling) && rand.Next(0, 32) == 0)
+                    {
+                        world.GetTileAt(x, y).AddObject(muteling);
                     }
                 }
             }

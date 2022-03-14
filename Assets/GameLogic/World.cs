@@ -28,6 +28,10 @@ namespace Assets.GameLogic
 
         public WorldTile GetTileAt(int x, int y)
         {
+            if (x <0 || x >= XSize || y < 0 || y >= YSize)
+            {
+                return null;
+            }
             return tiles[x, y];
         }
 
