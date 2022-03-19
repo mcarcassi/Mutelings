@@ -166,7 +166,12 @@ namespace Assets.GameLogic
         /// </returns>
         public bool RemoveObject(TileObject obj)
         {
-            return _objects.Remove(obj);
+            bool removed = _objects.Remove(obj);
+            if (removed)
+            {
+                obj.Position = null;
+            }
+            return removed;
         }
 
         /// <summary>
@@ -178,7 +183,17 @@ namespace Assets.GameLogic
         /// </returns>
         public bool RemoveAllObjects(Type type)
         {
-            return _objects.RemoveAll(x => x.GetType() == type) != 0;
+            return RemoveAllObjects(x => x.GetType() == type);
+        }
+
+        public bool RemoveAllObjects(Predicate<TileObject> condition)
+        {
+            List<TileObject> toBeRemoved = _objects.FindAll(condition);
+            foreach (TileObject tileObject in toBeRemoved)
+            {
+                RemoveObject(tileObject);
+            }
+            return toBeRemoved.Count != 0;
         }
 
         /// <summary>
@@ -186,7 +201,7 @@ namespace Assets.GameLogic
         /// </summary>
         public void RemoveAllObjects()
         {
-            _objects.RemoveAll(x => true);
+            RemoveAllObjects(x => true);
         }
 
         /// <summary>

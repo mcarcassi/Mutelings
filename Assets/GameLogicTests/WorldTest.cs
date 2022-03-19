@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+[TestFixture]
 public class WorldTest
 {
     // A Test behaves as an ordinary method
