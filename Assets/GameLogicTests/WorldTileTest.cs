@@ -16,6 +16,9 @@ public class WorldTileTest
     public void CanAddObjectTest()
     {
         WorldTile newSampleTile = new WorldTile();
+        WorldTile waterTile = new WorldTile();
+        waterTile.TerrainType = Library.Instance.GetTerrainTypeByName("Water");
+
         Plant newPlant = new Plant();
         Assert.IsTrue(newSampleTile.CanAddObject(newPlant));
 
@@ -26,6 +29,8 @@ public class WorldTileTest
         Assert.IsTrue(newSampleTile.CanAddObject(newMute));
         newSampleTile.AddObject(newMute);
         Assert.IsFalse(newSampleTile.CanAddObject(new Muteling()));
+
+        Assert.IsFalse(waterTile.CanAddObject(newMute));
 
 
     }

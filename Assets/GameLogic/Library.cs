@@ -22,6 +22,10 @@ namespace Assets.GameLogic
             DefaultTerrainType = TerrainTypes[1];
         }
 
+        public TerrainType GetTerrainTypeByName(String str)
+        {
+            return TerrainTypes.Find(x => x.Name.Equals(str));
+        }
         public static Library Instance { get; }
 
         static Library()

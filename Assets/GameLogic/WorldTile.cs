@@ -111,6 +111,10 @@ namespace Assets.GameLogic
             }
             else if (anObject is Muteling)
             {
+                if (!TerrainType.IsPassable)
+                {
+                    return false;
+                }
                 return canAddMuteling;
             }
             else
