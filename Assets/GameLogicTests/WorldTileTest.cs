@@ -96,5 +96,47 @@ public class WorldTileTest
 
     }
 
+    [Test]
+    public void NextTileTest()
+    {
+        WorldTile tile = world.GetTileAt(0, 0);
+        Assert.AreEqual(world.GetTileAt(0, 1), tile.GetNextTile(Direction.NE));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.NE).GetNextTile(Direction.SW));
+        Assert.AreEqual(world.GetTileAt(1, 0), tile.GetNextTile(Direction.E));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.E).GetNextTile(Direction.W));
+        Assert.AreEqual(null, tile.GetNextTile(Direction.SE));
+        Assert.AreEqual(null, tile.GetNextTile(Direction.SW));
+        Assert.AreEqual(null, tile.GetNextTile(Direction.W));
+        Assert.AreEqual(null, tile.GetNextTile(Direction.NW));
+
+        tile = world.GetTileAt(2, 2);
+        Assert.AreEqual(world.GetTileAt(2, 3), tile.GetNextTile(Direction.NE));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.NE).GetNextTile(Direction.SW));
+        Assert.AreEqual(world.GetTileAt(3, 2), tile.GetNextTile(Direction.E));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.E).GetNextTile(Direction.W));
+        Assert.AreEqual(world.GetTileAt(2, 1), tile.GetNextTile(Direction.SE));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.SE).GetNextTile(Direction.NW));
+        Assert.AreEqual(world.GetTileAt(1, 1), tile.GetNextTile(Direction.SW));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.SW).GetNextTile(Direction.NE));
+        Assert.AreEqual(world.GetTileAt(1, 2), tile.GetNextTile(Direction.W));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.W).GetNextTile(Direction.E));
+        Assert.AreEqual(world.GetTileAt(1, 3), tile.GetNextTile(Direction.NW));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.NW).GetNextTile(Direction.SE));
+
+        tile = world.GetTileAt(3, 3);
+        Assert.AreEqual(world.GetTileAt(4, 4), tile.GetNextTile(Direction.NE));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.NE).GetNextTile(Direction.SW));
+        Assert.AreEqual(world.GetTileAt(4, 3), tile.GetNextTile(Direction.E));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.E).GetNextTile(Direction.W));
+        Assert.AreEqual(world.GetTileAt(4, 2), tile.GetNextTile(Direction.SE));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.SE).GetNextTile(Direction.NW));
+        Assert.AreEqual(world.GetTileAt(3, 2), tile.GetNextTile(Direction.SW));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.SW).GetNextTile(Direction.NE));
+        Assert.AreEqual(world.GetTileAt(2, 3), tile.GetNextTile(Direction.W));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.W).GetNextTile(Direction.E));
+        Assert.AreEqual(world.GetTileAt(3, 4), tile.GetNextTile(Direction.NW));
+        Assert.AreEqual(tile, tile.GetNextTile(Direction.NW).GetNextTile(Direction.SE));
+    }
+
 
 }

@@ -54,13 +54,13 @@ namespace Assets.GameLogic
                 case Direction.W:
                     return _world.GetTileAt(X - 1, Y);
                 case Direction.NE:
-                    return _world.GetTileAt(X + (X % 2), Y + 1);
+                    return _world.GetTileAt(X + (Y % 2), Y + 1);
                 case Direction.SE:
-                    return _world.GetTileAt(X + (X % 2), Y - 1);
+                    return _world.GetTileAt(X + (Y % 2), Y - 1);
                 case Direction.NW:
-                    return _world.GetTileAt(X + (X % 2) - 1, Y + 1);
+                    return _world.GetTileAt(X + (Y % 2) - 1, Y + 1);
                 case Direction.SW:
-                    return _world.GetTileAt(X + (X % 2) - 1, Y - 1);
+                    return _world.GetTileAt(X + (Y % 2) - 1, Y - 1);
             }
             return null;
         }

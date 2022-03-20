@@ -1,10 +1,10 @@
 {
-    "name": "EditMode",
+    "name": "GameLogicTests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Scripts"
+        "GameLogic"
     ],
     "includePlatforms": [
         "Editor"
