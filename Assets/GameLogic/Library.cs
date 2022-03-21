@@ -12,12 +12,16 @@ namespace Assets.GameLogic
         public TerrainType DefaultTerrainType { get; }
         public List<PlantType> PlantTypes { get;}
 
+        public List<ResourceType> ResourceTypes { get; }
+
 
         public Library()
         {
             TerrainTypes = new List<TerrainType>();
             TerrainTypes.Add(new TerrainType("Water", false, false));
             TerrainTypes.Add(new TerrainType("Grassland", true, true));
+            DefaultTerrainType = TerrainTypes[1];
+
             PlantTypes = new List<PlantType>();
             PlantTypes.Add(new PlantType("Berry Bush", new List<TerrainType>()
             {
@@ -25,7 +29,9 @@ namespace Assets.GameLogic
             },
                 true, false, false, 10));
 
-            DefaultTerrainType = TerrainTypes[1];
+            ResourceTypes = new List<ResourceType>();
+            ResourceTypes.Add(new ResourceType("Fruit", true));
+
         }
 
         public TerrainType GetTerrainTypeByName(String str)

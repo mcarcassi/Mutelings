@@ -1,7 +1,17 @@
 ﻿using System;
-public class NewClass
+public class ResourceType
 {
-    public NewClass()
+    public String Name { get; }
+    public bool IsFood { get; }
+
+    public ResourceType(string name, bool isFood)
     {
+        Name = name;
+        IsFood = isFood;
+    }
+
+    public ResourceType()
+    {
+
     }
 }
