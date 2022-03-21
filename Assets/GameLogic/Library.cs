@@ -18,6 +18,12 @@ namespace Assets.GameLogic
             TerrainTypes = new List<TerrainType>();
             TerrainTypes.Add(new TerrainType("Water", false, false));
             TerrainTypes.Add(new TerrainType("Grassland", true, true));
+            PlantTypes = new List<PlantType>();
+            PlantTypes.Add(new PlantType("Berry Bush", new List<TerrainType>()
+            {
+                (Library.Instance.GetTerrainTypeByName("Grassland")),
+            },
+                true, false, false, 10));
 
             DefaultTerrainType = TerrainTypes[1];
         }

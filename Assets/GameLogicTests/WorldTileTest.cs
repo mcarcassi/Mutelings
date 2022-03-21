@@ -30,6 +30,7 @@ public class WorldTileTest
         newSampleTile.AddObject(newMute);
         Assert.IsFalse(newSampleTile.CanAddObject(new Muteling()));
 
+        Assert.IsFalse(waterTile.CanAddObject(newPlant));
         Assert.IsFalse(waterTile.CanAddObject(newMute));
 
 
