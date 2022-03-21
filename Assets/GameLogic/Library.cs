@@ -22,15 +22,11 @@ namespace Assets.GameLogic
             TerrainTypes.Add(new TerrainType("Grassland", true, true));
             DefaultTerrainType = TerrainTypes[1];
 
-            PlantTypes = new List<PlantType>();
-            PlantTypes.Add(new PlantType("Berry Bush", new List<TerrainType>()
-            {
-                (Library.Instance.GetTerrainTypeByName("Grassland")),
-            },
-                true, false, false, 10));
-
             ResourceTypes = new List<ResourceType>();
             ResourceTypes.Add(new ResourceType("Fruit", true));
+
+            PlantTypes = new List<PlantType>();
+            PlantTypes.Add(new PlantType("Berry Bush", true, false, false, 10));
 
         }
 
@@ -38,6 +34,17 @@ namespace Assets.GameLogic
         {
             return TerrainTypes.Find(x => x.Name.Equals(str));
         }
+
+        public PlantType GetPlantTypeByName(String str)
+        {
+            return PlantTypes.Find(x => x.Name.Equals(str));
+        }
+
+        public ResourceType GetResourceTypeByName(String str)
+        {
+            return ResourceTypes.Find(x => x.Name.Equals(str));
+        }
+
         public static Library Instance { get; }
 
         static Library()
