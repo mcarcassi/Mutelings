@@ -15,8 +15,8 @@ public class WorldTileTest
     [Test]
     public void CanAddObjectTest()
     {
-        WorldTile newSampleTile = new WorldTile();
-        WorldTile waterTile = new WorldTile();
+        WorldTile newSampleTile = new WorldTile(world, 0, 0);
+        WorldTile waterTile = new WorldTile(world, 0, 0);
         waterTile.TerrainType = Library.Instance.GetTerrainTypeByName("Water");
 
         Plant newPlant = new Plant();
@@ -39,7 +39,7 @@ public class WorldTileTest
     [Test]
     public void AddObjectTest()
     {
-        WorldTile sampleTile = new WorldTile();
+        WorldTile sampleTile = new WorldTile(world, 0, 0);
         Plant newPlant = new Plant();
         sampleTile.AddObject(newPlant);
         Assert.IsTrue(sampleTile.GetTileObjects()[0] == newPlant);
@@ -49,7 +49,7 @@ public class WorldTileTest
     [Test]
     public void ContainsTest()
     {
-        WorldTile sampleTile = new WorldTile();
+        WorldTile sampleTile = new WorldTile(world, 0, 0);
         Plant plant1 = new Plant();
         Plant plant2 = new Plant();
         Assert.IsFalse(sampleTile.Contains(plant1));
@@ -67,7 +67,7 @@ public class WorldTileTest
     [Test]
     public void RemoveSpecificObjectTest()
     {
-        WorldTile sampleTile = new WorldTile();
+        WorldTile sampleTile = new WorldTile(world, 0, 0);
         Muteling newMute = new Muteling();
         Plant newPlant = new Plant();
         sampleTile.AddObject(newPlant);
@@ -85,7 +85,7 @@ public class WorldTileTest
     [Test]
     public void RemoveAllObjectsTest()
     {
-        WorldTile sampleTile = new WorldTile();
+        WorldTile sampleTile = new WorldTile(world, 0, 0);
         Plant newPlant = new Plant();
         Muteling newMuteling = new Muteling();
         sampleTile.AddObject(newPlant);

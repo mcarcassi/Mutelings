@@ -17,4 +17,22 @@ public class LibraryTest
         Assert.IsNull(Library.Instance.GetTerrainTypeByName("Hello"));
     }
 
+    [Test]
+    public void GetResourceTypeByNameTest()
+    {
+        Assert.IsNotNull(Library.Instance.GetResourceTypeByName("Fruit"));
+        Assert.AreEqual("Fruit", Library.Instance.GetResourceTypeByName("Fruit").Name);
+
+        Assert.IsNull(Library.Instance.GetResourceTypeByName("Hello"));
+    }
+
+    [Test]
+    public void GetPlantTypeByNameTest()
+    {
+        Assert.IsNotNull(Library.Instance.GetPlantTypeByName("Berry Bush"));
+        Assert.AreEqual("Berry Bush", Library.Instance.GetPlantTypeByName("Berry Bush").Name);
+
+        Assert.IsNull(Library.Instance.GetPlantTypeByName("Hello"));
+    }
+
 }

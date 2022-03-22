@@ -26,7 +26,11 @@ namespace Assets.GameLogic
             ResourceTypes.Add(new ResourceType("Fruit", true));
 
             PlantTypes = new List<PlantType>();
-            PlantTypes.Add(new PlantType("Berry Bush", true, false, false, 10));
+            PlantTypes.Add(new PlantType("Berry Bush", new List<TerrainType>()
+            {
+                GetTerrainTypeByName("Grassland")
+            },
+                true, false, false, 10, GetResourceTypeByName("Fruit")));
 
         }
 
