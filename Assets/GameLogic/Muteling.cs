@@ -35,5 +35,14 @@ namespace Assets.GameLogic
             int intId = rand.Next(0, allowedDirections.Count);
             Move(allowedDirections[intId]);
         }
+
+        public void Eat()
+        {
+            if (!Position.Contains(typeof(Resource)))
+            {
+                throw new InvalidOperationException("There are no resources found on this tile");
+            }
+
+        }
     }
 }

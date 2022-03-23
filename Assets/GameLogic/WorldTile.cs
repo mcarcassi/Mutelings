@@ -246,6 +246,32 @@ namespace Assets.GameLogic
             return false;
         }
 
+        public List<Resource> GetResources()
+        {
+            List<Resource> resources = new List<Resource>();
+            foreach (TileObject obj in _objects)
+            {
+                if(obj.GetType() == typeof(Resource))
+                {
+                    resources.Add((Resource)obj);
+                }
+            }
+            return resources;
+        }
+
+        public bool CountainsFood()
+        {
+            List<Resource> resources = GetResources();
+            foreach (Resource resource in resources)
+            {
+                if (resource.ResourceType.IsFood)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Method <c>GetTileObjects</c> gives all objects on the tile.
         /// </summary>

@@ -144,5 +144,19 @@ public class WorldTileTest
         Assert.AreEqual(tile, tile.GetNextTile(Direction.NW).GetNextTile(Direction.SE));
     }
 
+    [Test]
+    public void GetResourcesTest()
+    {
+        WorldTile newSampleTile = new WorldTile(world, 0, 0);
+        Resource res1 = new Resource(Library.Instance.GetResourceTypeByName("Fruit"));
+        Resource res2 = new Resource(Library.Instance.GetResourceTypeByName("Fruit"));
+        Assert.IsEmpty(newSampleTile.GetResources());
+        newSampleTile.AddObject(res1);
+        Assert.AreEqual(res1, newSampleTile.GetResources()[0]);
+        newSampleTile.AddObject(res2);
+        Assert.AreEqual(res2, newSampleTile.GetResources()[1]);
+        
+    }
+
 
 }

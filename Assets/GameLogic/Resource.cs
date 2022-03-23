@@ -4,7 +4,7 @@ namespace Assets.GameLogic
 {
     public class Resource : TileObject
     {
-        ResourceType ResourceType { get; }
+        public ResourceType ResourceType { get; }
 
         public Resource(ResourceType resourceType)
         {
