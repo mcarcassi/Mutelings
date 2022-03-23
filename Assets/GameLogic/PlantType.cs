@@ -12,8 +12,10 @@ namespace Assets.GameLogic
         public bool CanDie { get; }
         public int MaxResourceCount { get; }
         public ResourceType ResourceType { get; }
+        public int GrowthStages { get; }
 
-        public PlantType(string name, List<TerrainType> habitableTerrain, bool isPassible, bool canReproduce, bool canDie, int maxResourceCount, ResourceType resourceType)
+
+        public PlantType(string name, List<TerrainType> habitableTerrain, bool isPassible, bool canReproduce, bool canDie, int maxResourceCount, ResourceType resourceType, int growthStages)
         {
             Name = name;
             HabitableTerrain = habitableTerrain;
@@ -22,6 +24,7 @@ namespace Assets.GameLogic
             CanDie = canDie;
             MaxResourceCount = maxResourceCount;
             ResourceType = resourceType;
+            GrowthStages = growthStages;
         }
     }
 }

@@ -14,4 +14,17 @@ public class PlantTest
         bush.GrowResource();
         Assert.AreEqual(1, bush.ResourceCount());
     }
+
+    [Test]
+    public void UpdateGrowthTest()
+    {
+        Plant bush = new Plant(Library.Instance.GetPlantTypeByName("Berry Bush"));
+        Assert.AreEqual(1, bush.GrowthStage);
+        bush.UpdateGrowth();
+        Assert.AreEqual(1, bush.GrowthStage);
+        bush.GrowthStage = 3;
+        Assert.AreEqual(3, bush.GrowthStage);
+        bush.UpdateGrowth();
+        Assert.AreEqual(1, bush.GrowthStage);
+    }
 }

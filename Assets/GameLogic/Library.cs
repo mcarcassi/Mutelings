@@ -30,7 +30,7 @@ namespace Assets.GameLogic
             {
                 GetTerrainTypeByName("Grassland")
             },
-                true, false, false, 10, GetResourceTypeByName("Fruit")));
+                true, false, false, 10, GetResourceTypeByName("Fruit"), 5));
 
         }
 

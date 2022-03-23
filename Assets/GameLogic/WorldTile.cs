@@ -30,11 +30,11 @@ namespace Assets.GameLogic
             TerrainType = Library.Instance.DefaultTerrainType;
         }
 
-        public WorldTile()
-        {
-            // TODO This needs to be removed
-            TerrainType = Library.Instance.DefaultTerrainType;
-        }
+        //public WorldTile()
+        //{
+        //    // TODO This needs to be removed
+        //    TerrainType = Library.Instance.DefaultTerrainType;
+        //}
 
         ///// <summary>
         ///// Constructor that allows custom terrain type.

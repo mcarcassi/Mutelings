@@ -11,11 +11,13 @@ namespace Assets.GameLogic
     {
         public PlantType PlantType { get; }
         private List<Resource> _resources;
+        public int GrowthStage { get; set; }
 
         public Plant(PlantType plantType)
         {
             PlantType = plantType;
             _resources = new List<Resource>();
+            GrowthStage = 1;
         }
 
         public Plant()
@@ -26,6 +28,19 @@ namespace Assets.GameLogic
         public void GrowResource()
         {
             _resources.Add(new Resource(PlantType.ResourceType));
+            UpdateGrowth();
+        }
+
+        public void UpdateGrowth()
+        {
+            if(this.ResourceCount() > PlantType.GrowthStages)
+            {
+                GrowthStage = PlantType.GrowthStages;
+            }
+            else
+            {
+                GrowthStage = (this.ResourceCount() + 1);
+            }
         }
 
         public List<Resource> GetResources()
@@ -37,5 +52,7 @@ namespace Assets.GameLogic
         {
             return _resources.Count;
         }
+
+
     }
 }
