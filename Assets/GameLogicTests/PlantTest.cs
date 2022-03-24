@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -13,6 +13,7 @@ public class PlantTest
         Plant bush = new Plant(Library.Instance.GetPlantTypeByName("Berry Bush"));
         bush.GrowResource();
         Assert.AreEqual(1, bush.ResourceCount());
+        Assert.IsTrue(bush.Position.Contains(typeof(Resource)));
     }
 
     [Test]
@@ -27,4 +28,5 @@ public class PlantTest
         bush.UpdateGrowth();
         Assert.AreEqual(1, bush.GrowthStage);
     }
+
 }

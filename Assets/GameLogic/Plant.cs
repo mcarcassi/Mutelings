@@ -11,6 +11,7 @@ namespace Assets.GameLogic
     {
         public PlantType PlantType { get; }
         private List<Resource> _resources;
+        private int _growthCount = 0;
         public int GrowthStage { get; set; }
 
         public Plant(PlantType plantType)
@@ -27,7 +28,9 @@ namespace Assets.GameLogic
 
         public void GrowResource()
         {
-            _resources.Add(new Resource(PlantType.ResourceType));
+            Resource resource = new Resource(PlantType.ResourceType);
+            _resources.Add(resource);
+            Position.AddObject(resource);
             UpdateGrowth();
         }
 
@@ -51,6 +54,25 @@ namespace Assets.GameLogic
         public int ResourceCount()
         {
             return _resources.Count;
+        }
+
+        public bool RemoveResource(Resource resource)
+        {
+            return _resources.Remove(resource);
+        }
+
+        public override void AdvanceTime()
+        {
+            if (_growthCount > 5)
+            {
+                GrowResource();
+                _growthCount = 0;
+            }
+            else
+            {
+                _growthCount++;
+            }
+            
         }
 
 

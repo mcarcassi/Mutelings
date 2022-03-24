@@ -18,6 +18,11 @@ namespace Assets.GameLogic
         public override void AdvanceTime()
         {
             List<Direction> allowedDirections = new List<Direction>();
+            if (Position.ContainsFood())
+            {
+                Eat();
+                return;
+            }
             foreach (Direction dir in Enum.GetValues(typeof(Direction)).Cast<Direction>())
             {
                 WorldTile tile = Position.GetNextTile(dir);
@@ -26,7 +31,6 @@ namespace Assets.GameLogic
                     allowedDirections.Add(dir);
                 }
             }
-
             if (allowedDirections.Count == 0)
             {
                 return;
@@ -40,8 +44,15 @@ namespace Assets.GameLogic
         {
             if (!Position.Contains(typeof(Resource)))
             {
-                throw new InvalidOperationException("There are no resources found on this tile");
+                throw new InvalidOperationException("There are no resources found on this tile.");
             }
+            if (!Position.ContainsFood())
+            {
+                throw new InvalidOperationException("There is no food on this tile.");
+            }
+            Resource foodEaten = Position.GetFirstFood();
+            Position.RemoveObject(foodEaten);
+
 
         }
     }

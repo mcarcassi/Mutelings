@@ -158,5 +158,17 @@ public class WorldTileTest
         
     }
 
+    [Test]
+    public void ContainsFoodTest()
+    {
+        WorldTile newSampleTile = new WorldTile(world, 0, 0);
+        Assert.IsFalse(newSampleTile.ContainsFood());
+        Resource res1 = new Resource(Library.Instance.GetResourceTypeByName("Fruit"));
+        newSampleTile.AddObject(res1);
+        Assert.IsTrue(newSampleTile.ContainsFood());
+    }
+
+
+
 
 }

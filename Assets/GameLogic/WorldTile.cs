@@ -259,7 +259,7 @@ namespace Assets.GameLogic
             return resources;
         }
 
-        public bool CountainsFood()
+        public bool ContainsFood()
         {
             List<Resource> resources = GetResources();
             foreach (Resource resource in resources)
@@ -271,6 +271,25 @@ namespace Assets.GameLogic
             }
             return false;
         }
+
+        public Resource GetFirstFood()
+        {
+            List<Resource> resources = GetResources();
+            if (!ContainsFood())
+            {
+                return null;
+            }
+            foreach (Resource resource in resources)
+            {
+                if (resource.ResourceType.IsFood)
+                {
+                    return resource;
+                }
+            }
+            return null;
+        }
+
+
 
         /// <summary>
         /// Method <c>GetTileObjects</c> gives all objects on the tile.
