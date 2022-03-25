@@ -150,6 +150,15 @@ public class TileAutomata : MonoBehaviour
             world.AdvanceTime();
             updateWorld();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                world.AdvanceTime();
+                updateWorld();
+                
+            }
+        }
         if (Input.GetMouseButtonDown(1))
         {
             clearMap(true);
