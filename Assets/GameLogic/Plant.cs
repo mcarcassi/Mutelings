@@ -23,7 +23,9 @@ namespace Assets.GameLogic
 
         public Plant()
         {
-
+            PlantType = Library.Instance.GetPlantTypeByName("Berry Bush");
+            _resources = new List<Resource>();
+            GrowthStage = 1;
         }
 
         public void GrowResource()
