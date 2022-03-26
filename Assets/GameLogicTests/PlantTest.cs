@@ -17,7 +17,8 @@ public class PlantTest
         newSampleTile.AddObject(bush);
         bush.GrowResource();
         Assert.AreEqual(1, bush.ResourceCount());
-        Assert.IsTrue(bush.Position.Contains(typeof(Resource)));
+        Assert.AreEqual(1, bush.Position.GetResources().Count);
+        Assert.AreEqual(0, bush.Position.GetResourcesOnGround().Count);
     }
 
     [Test]

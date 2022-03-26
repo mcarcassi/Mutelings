@@ -32,7 +32,6 @@ namespace Assets.GameLogic
         {
             Resource resource = new Resource(PlantType.ResourceType);
             _resources.Add(resource);
-            Position.AddObject(resource);
             UpdateGrowth();
         }
 

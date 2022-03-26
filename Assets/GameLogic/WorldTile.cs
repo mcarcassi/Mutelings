@@ -184,15 +184,25 @@ namespace Assets.GameLogic
             return false;
         }
 
-        public List<Resource> GetResources()
+        public List<Resource> GetResourcesOnGround()
         {
             List<Resource> resources = new List<Resource>();
             foreach (TileObject obj in _objects)
             {
-                if(obj.GetType() == typeof(Resource))
+                if (obj.GetType() == typeof(Resource))
                 {
                     resources.Add((Resource)obj);
                 }
+            }
+            return resources;
+        }
+
+        public List<Resource> GetResources()
+        {
+            List<Resource> resources = GetResourcesOnGround();
+            if (GetPlant() != null)
+            {
+                resources.AddRange(GetPlant().GetResources());
             }
             return resources;
         }
