@@ -30,21 +30,6 @@ namespace Assets.GameLogic
             TerrainType = Library.Instance.DefaultTerrainType;
         }
 
-        //public WorldTile()
-        //{
-        //    // TODO This needs to be removed
-        //    TerrainType = Library.Instance.DefaultTerrainType;
-        //}
-
-        ///// <summary>
-        ///// Constructor that allows custom terrain type.
-        ///// </summary>
-        ///// <param name="terrainType">The type of terrain for the tile.</param>
-        //public WorldTile(TerrainType terrainType)
-        //{
-        //    TerrainType = terrainType;
-        //}
-
         public WorldTile GetNextTile(Direction dir)
         {
             switch(dir)
@@ -89,39 +74,9 @@ namespace Assets.GameLogic
         /// </returns>
         public bool CanAddObject(TileObject anObject)
         {
-            bool canAddPlant = true;
-            bool canAddMuteling = true;
-
-            if (this.Contains(typeof(Plant)))
-            {
-                canAddPlant = false;
-            }
-            if (this.Contains(typeof(Muteling)))
-            {
-                canAddMuteling = false;
-            }
-
-            if (anObject is Plant)
-            {
-                if (!TerrainType.CanHavePlant)
-                {
-                    return false;
-                }
-                return canAddPlant;
-            }
-            else if (anObject is Muteling)
-            {
-                if (!TerrainType.IsPassable)
-                {
-                    return false;
-                }
-                return canAddMuteling;
-            }
-            else
-            {
-                return true;
-            }
+            return CanAddObject(anObject.GetType());
         }
+
         /// <summary>
         /// Method <c>CanAddObject</c> checks to see if TileObject type can be added to the tile.
         /// </summary>
@@ -131,33 +86,16 @@ namespace Assets.GameLogic
         /// </returns>
         public bool CanAddObject(Type type)
         {
-            bool canAddPlant = true;
-            bool canAddMuteling = true;
-
-            if (this.Contains(typeof(Plant)))
+            switch(type.Name)
             {
-                canAddPlant = false;
-            }
-            if (this.Contains(typeof(Muteling)))
-            {
-                canAddMuteling = false;
-            }
-
-            if (type == typeof(Plant))
-            {
-                if (!TerrainType.CanHavePlant)
-                {
+                case "Plant":
+                    return TerrainType.CanHavePlant && GetPlant() == null;
+                case "Muteling":
+                    return TerrainType.IsPassable && GetMuteling() == null;
+                case "Resource":
+                    return true;
+                default:
                     return false;
-                }
-                return canAddPlant;
-            }
-            else if (type == typeof(Muteling))
-            {
-                return canAddMuteling;
-            }
-            else
-            {
-                return true;
             }
         }
 
@@ -257,6 +195,16 @@ namespace Assets.GameLogic
                 }
             }
             return resources;
+        }
+
+        public Plant GetPlant()
+        {
+            return (Plant)_objects.Find(x => x.GetType().Equals(typeof(Plant)));
+        }
+
+        public Muteling GetMuteling()
+        {
+            return (Muteling)_objects.Find(x => x.GetType().Equals(typeof(Muteling)));
         }
 
         public bool ContainsFood()
