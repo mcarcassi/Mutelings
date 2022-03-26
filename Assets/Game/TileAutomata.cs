@@ -18,7 +18,6 @@ public class TileAutomata : MonoBehaviour
 
     [Range(1, 10)]
     public int numR;
-    private int count = 0;
 
     private World world;
     public Vector3Int tmapSize;

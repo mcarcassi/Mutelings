@@ -20,8 +20,8 @@ public class LibraryTest
     [Test]
     public void GetResourceTypeByNameTest()
     {
-        Assert.IsNotNull(Library.Instance.GetResourceTypeByName("Fruit"));
-        Assert.AreEqual("Fruit", Library.Instance.GetResourceTypeByName("Fruit").Name);
+        Assert.IsNotNull(Library.Instance.GetResourceTypeByName("Redberry"));
+        Assert.AreEqual("Redberry", Library.Instance.GetResourceTypeByName("Redberry").Name);
 
         Assert.IsNull(Library.Instance.GetResourceTypeByName("Hello"));
     }
@@ -29,8 +29,8 @@ public class LibraryTest
     [Test]
     public void GetPlantTypeByNameTest()
     {
-        Assert.IsNotNull(Library.Instance.GetPlantTypeByName("Berry Bush"));
-        Assert.AreEqual("Berry Bush", Library.Instance.GetPlantTypeByName("Berry Bush").Name);
+        Assert.IsNotNull(Library.Instance.GetPlantTypeByName("Redberry Bush"));
+        Assert.AreEqual("Redberry Bush", Library.Instance.GetPlantTypeByName("Redberry Bush").Name);
 
         Assert.IsNull(Library.Instance.GetPlantTypeByName("Hello"));
     }

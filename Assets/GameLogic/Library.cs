@@ -23,20 +23,26 @@ namespace Assets.GameLogic
             DefaultTerrainType = TerrainTypes[1];
 
             ResourceTypes = new List<ResourceType>();
-            ResourceTypes.Add(new ResourceType("Fruit", true));
+            ResourceTypes.Add(new ResourceType("Redberry", true));
+            ResourceTypes.Add(new ResourceType("Muteling Egg", false));
 
             PlantTypes = new List<PlantType>();
-            PlantTypes.Add(new PlantType("Berry Bush", new List<TerrainType>()
-            {
-                GetTerrainTypeByName("Grassland")
-            },
-                true, false, false, 10, GetResourceTypeByName("Fruit"), 5));
-
+            PlantTypes.Add(new PlantType("Redberry Bush", GetTerrainTypesByName("Grassland"), true, false, false, 10, GetResourceTypeByName("Redberry"), 5));
         }
 
-        public TerrainType GetTerrainTypeByName(String str)
+        public TerrainType GetTerrainTypeByName(String name)
         {
-            return TerrainTypes.Find(x => x.Name.Equals(str));
+            return TerrainTypes.Find(x => x.Name.Equals(name));
+        }
+
+        public List<TerrainType> GetTerrainTypesByName(params String[] names)
+        {
+            List<TerrainType> terrainTypes = new List<TerrainType>();
+            foreach (String name in names)
+            {
+                terrainTypes.Add(GetTerrainTypeByName(name));
+            }
+            return terrainTypes;
         }
 
         public PlantType GetPlantTypeByName(String str)

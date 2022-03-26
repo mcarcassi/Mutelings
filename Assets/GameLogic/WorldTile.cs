@@ -94,6 +94,8 @@ namespace Assets.GameLogic
                     return TerrainType.IsPassable && GetMuteling() == null;
                 case "Resource":
                     return true;
+                case "Egg":
+                    return true;
                 default:
                     return false;
             }
@@ -109,6 +111,10 @@ namespace Assets.GameLogic
         public bool RemoveObject(TileObject obj)
         {
             bool removed = _objects.Remove(obj);
+            if (removed == false && obj is Resource && GetPlant() != null)
+            {
+                removed = GetPlant().RemoveResource((Resource) obj);
+            }
             if (removed)
             {
                 obj.Position = null;

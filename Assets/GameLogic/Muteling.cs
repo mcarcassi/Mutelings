@@ -9,6 +9,7 @@ namespace Assets.GameLogic
     public class Muteling : TileObject
     {
         private static Random rand = new Random();
+        private int _energy = 50;
 
         public void Move(Direction dir)
         {
@@ -17,6 +18,7 @@ namespace Assets.GameLogic
 
         public override void AdvanceTime()
         {
+            _energy -= 5;
             List<Direction> allowedDirections = new List<Direction>();
             if (Position.ContainsFood())
             {
@@ -38,22 +40,28 @@ namespace Assets.GameLogic
 
             int intId = rand.Next(0, allowedDirections.Count);
             Move(allowedDirections[intId]);
+
+            if (_energy >= 100)
+            {
+                Position.AddObject(new Egg());
+                _energy -= 75;
+            }
+
+            if (_energy <= 0)
+            {
+                Position = null;
+            }
         }
 
         public void Eat()
         {
-            if (!Position.Contains(typeof(Resource)))
-            {
-                throw new InvalidOperationException("There are no resources found on this tile.");
-            }
-            if (!Position.ContainsFood())
+            Resource foodEaten = Position.GetFirstFood();
+            if (foodEaten == null)
             {
                 throw new InvalidOperationException("There is no food on this tile.");
             }
-            Resource foodEaten = Position.GetFirstFood();
             Position.RemoveObject(foodEaten);
-
-
+            _energy += 30;
         }
     }
 }

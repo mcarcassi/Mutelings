@@ -23,7 +23,7 @@ namespace Assets.GameLogic
 
         public Plant()
         {
-            PlantType = Library.Instance.GetPlantTypeByName("Berry Bush");
+            PlantType = Library.Instance.GetPlantTypeByName("Redberry Bush");
             _resources = new List<Resource>();
             GrowthStage = 1;
         }

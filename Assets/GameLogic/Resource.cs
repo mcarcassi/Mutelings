@@ -10,11 +10,6 @@ namespace Assets.GameLogic
         {
             ResourceType = resourceType;
         }
-
-        public Resource()
-        {
-
-        }
     }
 }
 

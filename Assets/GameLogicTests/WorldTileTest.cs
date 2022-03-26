@@ -148,8 +148,8 @@ public class WorldTileTest
     public void GetResourcesTest()
     {
         WorldTile newSampleTile = new WorldTile(world, 0, 0);
-        Resource res1 = new Resource(Library.Instance.GetResourceTypeByName("Fruit"));
-        Resource res2 = new Resource(Library.Instance.GetResourceTypeByName("Fruit"));
+        Resource res1 = new Resource(Library.Instance.GetResourceTypeByName("Redberry"));
+        Resource res2 = new Resource(Library.Instance.GetResourceTypeByName("Redberry"));
         Assert.IsEmpty(newSampleTile.GetResources());
         newSampleTile.AddObject(res1);
         Assert.AreEqual(res1, newSampleTile.GetResources()[0]);
@@ -163,7 +163,7 @@ public class WorldTileTest
     {
         WorldTile newSampleTile = new WorldTile(world, 0, 0);
         Assert.IsFalse(newSampleTile.ContainsFood());
-        Resource res1 = new Resource(Library.Instance.GetResourceTypeByName("Fruit"));
+        Resource res1 = new Resource(Library.Instance.GetResourceTypeByName("Redberry"));
         newSampleTile.AddObject(res1);
         Assert.IsTrue(newSampleTile.ContainsFood());
     }

@@ -9,9 +9,4 @@ public class ResourceType
         Name = name;
         IsFood = isFood;
     }
-
-    public ResourceType()
-    {
-
-    }
 }
