@@ -16,8 +16,12 @@ namespace Assets.GameLogic
         public TerrainType TerrainType { get; set; }
         private List<TileObject> _objects = new List<TileObject>();
         private World _world;
+
         public int X { get; }
         public int Y { get; }
+        public int Q { get; }
+        public int R { get; }
+        public int S { get; }
 
         /// <summary>
         /// Default constructor that creates a tile of default terrain type.
@@ -27,6 +31,9 @@ namespace Assets.GameLogic
             _world = world;
             X = x;
             Y = y;
+            Q = x + (y + (y % 2)) / 2;
+            R = - y;
+            S = - Q - R;
             TerrainType = Library.Instance.DefaultTerrainType;
         }
 
@@ -142,6 +149,11 @@ namespace Assets.GameLogic
                 RemoveObject(tileObject);
             }
             return toBeRemoved.Count != 0;
+        }
+
+        public int DistanceFrom(WorldTile other)
+        {
+            return (Math.Abs(other.Q - Q) + Math.Abs(other.R - R) + Math.Abs(other.S - S)) / 2;
         }
 
         /// <summary>

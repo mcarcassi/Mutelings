@@ -103,6 +103,49 @@ public class WorldTileTest
     }
 
     [Test]
+    public void QRSCoordinatesTest()
+    {
+        TestQRSNeighbors(world.GetTileAt(4, 4));
+        TestQRSNeighbors(world.GetTileAt(4, 3));
+        TestQRSNeighbors(world.GetTileAt(3, 4));
+        TestQRSNeighbors(world.GetTileAt(3, 3));
+    }
+
+    private void TestQRSNeighbors(WorldTile tile)
+    {
+        Assert.AreEqual(1, tile.GetNextTile(Direction.NE).Q - tile.Q);
+        Assert.AreEqual(-1, tile.GetNextTile(Direction.NE).R - tile.R);
+        Assert.AreEqual(0, tile.GetNextTile(Direction.NE).S - tile.S);
+        Assert.AreEqual(1, tile.GetNextTile(Direction.E).Q - tile.Q);
+        Assert.AreEqual(0, tile.GetNextTile(Direction.E).R - tile.R);
+        Assert.AreEqual(-1, tile.GetNextTile(Direction.E).S - tile.S);
+        Assert.AreEqual(0, tile.GetNextTile(Direction.SE).Q - tile.Q);
+        Assert.AreEqual(1, tile.GetNextTile(Direction.SE).R - tile.R);
+        Assert.AreEqual(-1, tile.GetNextTile(Direction.SE).S - tile.S);
+        Assert.AreEqual(-1, tile.GetNextTile(Direction.SW).Q - tile.Q);
+        Assert.AreEqual(1, tile.GetNextTile(Direction.SW).R - tile.R);
+        Assert.AreEqual(0, tile.GetNextTile(Direction.SW).S - tile.S);
+        Assert.AreEqual(-1, tile.GetNextTile(Direction.W).Q - tile.Q);
+        Assert.AreEqual(0, tile.GetNextTile(Direction.W).R - tile.R);
+        Assert.AreEqual(1, tile.GetNextTile(Direction.W).S - tile.S);
+        Assert.AreEqual(0, tile.GetNextTile(Direction.NW).Q - tile.Q);
+        Assert.AreEqual(-1, tile.GetNextTile(Direction.NW).R - tile.R);
+        Assert.AreEqual(1, tile.GetNextTile(Direction.NW).S - tile.S);
+    }
+
+    [Test]
+    public void DistanceTest()
+    {
+        WorldTile tile = world.GetTileAt(4, 4);
+        Assert.AreEqual(0, tile.DistanceFrom(tile));
+        Assert.AreEqual(1, tile.DistanceFrom(tile.GetNextTile(Direction.NE)));
+        Assert.AreEqual(1, tile.DistanceFrom(tile.GetNextTile(Direction.E)));
+        Assert.AreEqual(4, tile.DistanceFrom(tile.GetNextTile(Direction.NE).GetNextTile(Direction.E).GetNextTile(Direction.NE).GetNextTile(Direction.NE)));
+        Assert.AreEqual(4, tile.DistanceFrom(tile.GetNextTile(Direction.E).GetNextTile(Direction.SE).GetNextTile(Direction.SE).GetNextTile(Direction.E)));
+    }
+
+
+    [Test]
     public void NextTileTest()
     {
         WorldTile tile = world.GetTileAt(0, 0);
