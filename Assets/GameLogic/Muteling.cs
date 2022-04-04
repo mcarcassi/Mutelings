@@ -63,5 +63,35 @@ namespace Assets.GameLogic
             Position.RemoveObject(foodEaten);
             _energy += 30;
         }
+
+        public List<WorldTile> SenseFood(int senseRange)
+        {
+            int x;
+            int y;
+            List<WorldTile> foodTiles = new List<WorldTile>();
+            //Loop to iterate through all tiles
+            for (int q = -senseRange; q <= senseRange; q++)
+            {
+                for (int r = -senseRange; r <= senseRange; r++)
+                {
+                    for (int s = -senseRange; s <= senseRange; s++)
+                    {
+                        //Checks if tile exists
+                        if(q + r + s == 0)
+                        {
+                            //Convert QRS to XY. Perhaps can have better function later
+                            x = q + (r - (r % 2)) / 2;
+                            y = -r;
+                            //Checking if tile has a plant
+                            if (Position.GetWorld().GetTileAt(x, y).Contains(typeof(Plant)))
+                            {
+                                foodTiles.Add(Position.GetWorld().GetTileAt(x, y));
+                            }
+                        }
+                    }
+                }
+            }
+            return foodTiles;
+        }
     }
 }

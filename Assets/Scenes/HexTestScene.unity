@@ -320,7 +320,7 @@ MonoBehaviour:
   birthLimit: 3
   deathLimit: 2
   numR: 1
-  tmapSize: {x: 120, y: 70, z: 0}
+  tmapSize: {x: 50, y: 50, z: 0}
   mutelingMap: {fileID: 91484146}
   plantMap: {fileID: 1680580313}
   terrainMap: {fileID: 1049840991}

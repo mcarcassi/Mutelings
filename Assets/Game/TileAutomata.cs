@@ -61,12 +61,10 @@ public class TileAutomata : MonoBehaviour
                     if (tileObject is Plant)
                     {
                         plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plantTile);
-                        print("Found plant");
                     }
                     if (tileObject is Muteling)
                     {
                         mutelingMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), mutelingTile);
-                        print("Found muteling");
                     }
                 }
             }

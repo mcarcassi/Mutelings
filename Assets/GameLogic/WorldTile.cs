@@ -37,6 +37,11 @@ namespace Assets.GameLogic
             TerrainType = Library.Instance.DefaultTerrainType;
         }
 
+        public World GetWorld()
+        {
+            return _world;
+        }
+
         public WorldTile GetNextTile(Direction dir)
         {
             switch(dir)

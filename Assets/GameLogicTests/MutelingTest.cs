@@ -73,5 +73,23 @@ public class MutelingTest
         Assert.AreEqual(world.GetTileAt(1, 0), mute.Position);
     }
 
+    [Test]
+    public void SensingTest()
+    {
+        Muteling mute1 = new Muteling();
+        Muteling mute2 = new Muteling();
+        Plant plant1 = new Plant();
+        Plant plant2 = new Plant();
+        world.GetTileAt(2, 2).AddObject(mute1);
+        world.GetTileAt(0, 0).AddObject(mute2);
+        world.GetTileAt(2, 2).AddObject(plant1);
+        world.GetTileAt(4, 4).AddObject(plant2);
+        Assert.AreEqual(new List<WorldTile>() { world.GetTileAt(2, 2), world.GetTileAt(4, 4) }, mute1.SenseFood(3));
+        Assert.AreEqual(new List<WorldTile>() { world.GetTileAt(2, 2) }, mute1.SenseFood(3));
+
+
+
+    }
+
 
 }
