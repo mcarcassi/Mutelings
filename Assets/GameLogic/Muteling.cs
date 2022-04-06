@@ -64,34 +64,96 @@ namespace Assets.GameLogic
             _energy += 30;
         }
 
+
+
+
+
         public List<WorldTile> SenseFood(int senseRange)
         {
-            int x;
-            int y;
             List<WorldTile> foodTiles = new List<WorldTile>();
-            //Loop to iterate through all tiles
-            for (int q = -senseRange; q <= senseRange; q++)
+            WorldTile currentTile = Position;
+            Direction currentDirection = Direction.SW;
+            if (currentTile.Contains(typeof(Plant)))
             {
-                for (int r = -senseRange; r <= senseRange; r++)
+                WorldTile newTile = new WorldTile(currentTile.GetWorld(), currentTile.X, currentTile.Y);
+                foodTiles.Add(newTile);
+            }
+            for (int i = 0; i < senseRange; i++)
+            {
+                for(int j = 0; j < 6; j++)
                 {
-                    for (int s = -senseRange; s <= senseRange; s++)
+                    if(j == 0)
                     {
-                        //Checks if tile exists
-                        if(q + r + s == 0)
+                        currentDirection = Direction.E;
+                    }
+                    else if(j == 1)
+                    {
+                        currentDirection = Direction.NE;
+                    }
+                    else if (j == 2)
+                    {
+                        currentDirection = Direction.NW;
+                    }
+                    else if (j == 3)
+                    {
+                        currentDirection = Direction.W;
+                    }
+                    else if (j == 4)
+                    {
+                        currentDirection = Direction.SW;
+                    }
+                    else if (j == 5)
+                    {
+                        currentDirection = Direction.SE;
+                    }
+                    
+                    for (int k = 0; k < currentTile.DistanceFrom(Position); k++)
+                    {
+                        
+                        if (currentTile.Contains(typeof(Plant)))
                         {
-                            //Convert QRS to XY. Perhaps can have better function later
-                            x = q + (r - (r % 2)) / 2;
-                            y = -r;
-                            //Checking if tile has a plant
-                            if (Position.GetWorld().GetTileAt(x, y).Contains(typeof(Plant)))
-                            {
-                                foodTiles.Add(Position.GetWorld().GetTileAt(x, y));
-                            }
+                            WorldTile newTile = new WorldTile(currentTile.GetWorld(), currentTile.X, currentTile.Y);
+                            foodTiles.Add(newTile);
                         }
+                        currentTile = currentTile.GetNextTile(currentDirection);
                     }
                 }
+                currentTile = currentTile.GetNextTile(Direction.SW);
             }
             return foodTiles;
         }
+
+
+
+
+        //public List<WorldTile> SenseFood(int senseRange)
+        //{
+        //    int x;
+        //    int y;
+        //    List<WorldTile> foodTiles = new List<WorldTile>();
+        //    //Loop to iterate through all tiles
+        //    for (int q = Position.Q-senseRange; q <= Position.Q + senseRange; q++)
+        //    {
+        //        for (int r = Position.R-senseRange; r <= Position.R + senseRange; r++)
+        //        {
+        //            for (int s = Position.S-senseRange; s <= Position.S + senseRange; s++)
+        //            {
+        //                //Checks if tile exists
+        //                if(q + r + s == 0 && r <= 0 && q >= 0)
+        //                {
+        //                    //Convert QRS to XY. Perhaps can have better function later
+        //                    x = q + (r - (r % 2)) / 2;
+        //                    y = -r;
+        //                    //Checking if tile has a plant
+        //                    if (Position.GetWorld().GetTileAt(x, y).Contains(typeof(Plant)))
+        //                    {
+        //                        foodTiles.Add(Position.GetWorld().GetTileAt(x, y));
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return foodTiles;
+        //}
     }
 }

@@ -78,14 +78,32 @@ public class MutelingTest
     {
         Muteling mute1 = new Muteling();
         Muteling mute2 = new Muteling();
-        Plant plant1 = new Plant();
-        Plant plant2 = new Plant();
+        Plant plant1 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
+        Plant plant2 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
+        Plant plant3 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
         world.GetTileAt(2, 2).AddObject(mute1);
         world.GetTileAt(0, 0).AddObject(mute2);
+
         world.GetTileAt(2, 2).AddObject(plant1);
         world.GetTileAt(4, 4).AddObject(plant2);
-        Assert.AreEqual(new List<WorldTile>() { world.GetTileAt(2, 2), world.GetTileAt(4, 4) }, mute1.SenseFood(3));
-        Assert.AreEqual(new List<WorldTile>() { world.GetTileAt(2, 2) }, mute1.SenseFood(3));
+        world.GetTileAt(1, 1).AddObject(plant3);
+        List<WorldTile> foodTiles1 = mute1.SenseFood(3);
+        List<WorldTile> foodTiles2 = mute2.SenseFood(3);
+
+        Assert.AreEqual(3, foodTiles1.Count);
+        Assert.AreEqual( 2, foodTiles1[0].X);
+        Assert.AreEqual(2, foodTiles1[0].Y);
+        Assert.AreEqual(1, foodTiles1[0].X);
+        Assert.AreEqual(1, foodTiles1[0].Y);
+        Assert.AreEqual(4, foodTiles1[0].X);
+        Assert.AreEqual(4, foodTiles1[0].Y);
+
+        Assert.AreEqual(2, foodTiles2.Count);
+        Assert.AreEqual(2, foodTiles2[0].X);
+        Assert.AreEqual(2, foodTiles2[0].Y);
+        Assert.AreEqual(1, foodTiles2[0].X);
+        Assert.AreEqual(1, foodTiles2[0].Y);
+
 
 
 

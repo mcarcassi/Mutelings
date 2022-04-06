@@ -32,7 +32,7 @@ namespace Assets.GameLogic
             X = x;
             Y = y;
             Q = x + (y + (y % 2)) / 2;
-            R = - y;
+            R = -y;
             S = - Q - R;
             TerrainType = Library.Instance.DefaultTerrainType;
         }
