@@ -91,7 +91,7 @@ public class MutelingTest
         List<WorldTile> foodTiles2 = mute2.SenseFood(3);
 
         Assert.AreEqual(3, foodTiles1.Count);
-        Assert.AreEqual( 2, foodTiles1[0].X);
+        Assert.AreEqual(2, foodTiles1[0].X);
         Assert.AreEqual(2, foodTiles1[0].Y);
         Assert.AreEqual(1, foodTiles1[0].X);
         Assert.AreEqual(1, foodTiles1[0].Y);

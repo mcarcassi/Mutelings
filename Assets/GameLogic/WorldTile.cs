@@ -270,6 +270,18 @@ namespace Assets.GameLogic
             return null;
         }
 
+        public List<WorldTile> GetNeighbors()
+        {
+            List<WorldTile> neighbors = new List<WorldTile>();
+            neighbors.Add(GetNextTile(Direction.E));
+            neighbors.Add(GetNextTile(Direction.NE));
+            neighbors.Add(GetNextTile(Direction.NW));
+            neighbors.Add(GetNextTile(Direction.W));
+            neighbors.Add(GetNextTile(Direction.SW));
+            neighbors.Add(GetNextTile(Direction.SE));
+            return neighbors;
+        }
+
 
 
         /// <summary>

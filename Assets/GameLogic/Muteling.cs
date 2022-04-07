@@ -65,63 +65,102 @@ namespace Assets.GameLogic
         }
 
 
-
-
-
         public List<WorldTile> SenseFood(int senseRange)
         {
             List<WorldTile> foodTiles = new List<WorldTile>();
-            WorldTile currentTile = Position;
-            Direction currentDirection = Direction.SW;
-            if (currentTile.Contains(typeof(Plant)))
+            List<WorldTile> visited = new List<WorldTile>();
+            List<WorldTile> fringes = new List<WorldTile>();
+            List<WorldTile> neighbors = new List<WorldTile>();
+            List<WorldTile> currentTiles = new List<WorldTile>();
+            visited.Add(Position);
+            fringes.Add(Position);
+            if (Position.Contains(typeof(Plant)))
             {
-                WorldTile newTile = new WorldTile(currentTile.GetWorld(), currentTile.X, currentTile.Y);
+                WorldTile newTile = new WorldTile(Position.GetWorld(), Position.X, Position.Y);
                 foodTiles.Add(newTile);
             }
-            for (int i = 0; i < senseRange; i++)
+            for (int i = 1; i < senseRange; i++)
             {
-                for(int j = 0; j < 6; j++)
+                foreach (WorldTile current in fringes)
                 {
-                    if(j == 0)
+                    neighbors = current.GetNeighbors();
+                    foreach (WorldTile tile in neighbors)
                     {
-                        currentDirection = Direction.E;
-                    }
-                    else if(j == 1)
-                    {
-                        currentDirection = Direction.NE;
-                    }
-                    else if (j == 2)
-                    {
-                        currentDirection = Direction.NW;
-                    }
-                    else if (j == 3)
-                    {
-                        currentDirection = Direction.W;
-                    }
-                    else if (j == 4)
-                    {
-                        currentDirection = Direction.SW;
-                    }
-                    else if (j == 5)
-                    {
-                        currentDirection = Direction.SE;
-                    }
-                    
-                    for (int k = 0; k < currentTile.DistanceFrom(Position); k++)
-                    {
-                        
-                        if (currentTile.Contains(typeof(Plant)))
+                        if(tile != null && !visited.Contains(tile))
                         {
-                            WorldTile newTile = new WorldTile(currentTile.GetWorld(), currentTile.X, currentTile.Y);
-                            foodTiles.Add(newTile);
+                            if (tile.Contains(typeof(Plant)))
+                            { 
+                                WorldTile newTile = new WorldTile(tile.GetWorld(), tile.X, tile.Y);
+                                foodTiles.Add(newTile);
+                            }
+                            currentTiles.Add(tile);
                         }
-                        currentTile = currentTile.GetNextTile(currentDirection);
                     }
                 }
-                currentTile = currentTile.GetNextTile(Direction.SW);
+                fringes.RemoveAll(x => true);
+                fringes = currentTiles;
+                currentTiles.RemoveAll(x => true);
+
             }
+            
             return foodTiles;
         }
+
+
+        //public List<WorldTile> SenseFood(int senseRange)
+        //{
+        //    List<WorldTile> foodTiles = new List<WorldTile>();
+        //    WorldTile currentTile = Position;
+        //    Direction currentDirection = Direction.SW;
+        //    if (currentTile.Contains(typeof(Plant)))
+        //    {
+        //        WorldTile newTile = new WorldTile(currentTile.GetWorld(), currentTile.X, currentTile.Y);
+        //        foodTiles.Add(newTile);
+        //    }
+        //    for (int i = 0; i < senseRange; i++)
+        //    {
+        //        for (int j = 0; j < 6; j++)
+        //        {
+        //            if (j == 0)
+        //            {
+        //                currentDirection = Direction.E;
+        //            }
+        //            else if (j == 1)
+        //            {
+        //                currentDirection = Direction.NE;
+        //            }
+        //            else if (j == 2)
+        //            {
+        //                currentDirection = Direction.NW;
+        //            }
+        //            else if (j == 3)
+        //            {
+        //                currentDirection = Direction.W;
+        //            }
+        //            else if (j == 4)
+        //            {
+        //                currentDirection = Direction.SW;
+        //            }
+        //            else if (j == 5)
+        //            {
+        //                currentDirection = Direction.SE;
+        //            }
+
+        //            for (int k = 0; k < currentTile.DistanceFrom(Position); k++)
+        //            {
+
+        //                if (currentTile.Contains(typeof(Plant)))
+        //                {
+        //                    WorldTile newTile = new WorldTile(currentTile.GetWorld(), currentTile.X, currentTile.Y);
+        //                    foodTiles.Add(newTile);
+        //                }
+        //                currentTile = currentTile.GetNextTile(currentDirection);
+        //            }
+        //        }
+        //        currentTile = currentTile.GetNextTile(Direction.SW);
+        //    }
+        //    return foodTiles;
+        //}
 
 
 
