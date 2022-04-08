@@ -93,16 +93,16 @@ public class MutelingTest
         Assert.AreEqual(3, foodTiles1.Count);
         Assert.AreEqual(2, foodTiles1[0].X);
         Assert.AreEqual(2, foodTiles1[0].Y);
-        Assert.AreEqual(1, foodTiles1[0].X);
-        Assert.AreEqual(1, foodTiles1[0].Y);
-        Assert.AreEqual(4, foodTiles1[0].X);
-        Assert.AreEqual(4, foodTiles1[0].Y);
+        Assert.AreEqual(1, foodTiles1[1].X);
+        Assert.AreEqual(1, foodTiles1[1].Y);
+        Assert.AreEqual(4, foodTiles1[2].X);
+        Assert.AreEqual(4, foodTiles1[2].Y);
 
         Assert.AreEqual(2, foodTiles2.Count);
-        Assert.AreEqual(2, foodTiles2[0].X);
-        Assert.AreEqual(2, foodTiles2[0].Y);
         Assert.AreEqual(1, foodTiles2[0].X);
         Assert.AreEqual(1, foodTiles2[0].Y);
+        Assert.AreEqual(2, foodTiles2[1].X);
+        Assert.AreEqual(2, foodTiles2[1].Y);
 
 
 

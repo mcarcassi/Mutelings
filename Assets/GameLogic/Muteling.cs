@@ -79,7 +79,7 @@ namespace Assets.GameLogic
                 WorldTile newTile = new WorldTile(Position.GetWorld(), Position.X, Position.Y);
                 foodTiles.Add(newTile);
             }
-            for (int i = 1; i < senseRange; i++)
+            for (int i = 0; i < senseRange; i++)
             {
                 foreach (WorldTile current in fringes)
                 {
@@ -94,11 +94,12 @@ namespace Assets.GameLogic
                                 foodTiles.Add(newTile);
                             }
                             currentTiles.Add(tile);
+                            visited.Add(tile);
                         }
                     }
                 }
                 fringes.RemoveAll(x => true);
-                fringes = currentTiles;
+                fringes.AddRange(currentTiles);
                 currentTiles.RemoveAll(x => true);
 
             }
