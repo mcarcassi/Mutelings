@@ -71,36 +71,34 @@ namespace Assets.GameLogic
             List<WorldTile> visited = new List<WorldTile>();
             List<WorldTile> fringes = new List<WorldTile>();
             List<WorldTile> neighbors = new List<WorldTile>();
-            List<WorldTile> currentTiles = new List<WorldTile>();
+            List<WorldTile> nextLayer = new List<WorldTile>();
             visited.Add(Position);
             fringes.Add(Position);
             if (Position.Contains(typeof(Plant)))
             {
-                WorldTile newTile = new WorldTile(Position.GetWorld(), Position.X, Position.Y);
-                foodTiles.Add(newTile);
+                foodTiles.Add(Position);
             }
             for (int i = 0; i < senseRange; i++)
             {
-                foreach (WorldTile current in fringes)
+                foreach (WorldTile fringeTile in fringes)
                 {
-                    neighbors = current.GetNeighbors();
+                    neighbors = fringeTile.GetNeighbors();
                     foreach (WorldTile tile in neighbors)
                     {
-                        if(tile != null && !visited.Contains(tile))
+                        if(!visited.Contains(tile))
                         {
                             if (tile.Contains(typeof(Plant)))
                             { 
-                                WorldTile newTile = new WorldTile(tile.GetWorld(), tile.X, tile.Y);
-                                foodTiles.Add(newTile);
+                                foodTiles.Add(tile);
                             }
-                            currentTiles.Add(tile);
+                            nextLayer.Add(tile);
                             visited.Add(tile);
                         }
                     }
                 }
                 fringes.RemoveAll(x => true);
-                fringes.AddRange(currentTiles);
-                currentTiles.RemoveAll(x => true);
+                fringes.AddRange(nextLayer);
+                nextLayer.RemoveAll(x => true);
 
             }
             

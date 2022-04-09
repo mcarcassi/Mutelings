@@ -201,39 +201,29 @@ public class WorldTileTest
 
         WorldTile newSampleTile2 = new WorldTile(world, 0, 0);
         neighbors = newSampleTile2.GetNeighbors();
+        Assert.AreEqual(2, neighbors.Count);
         Assert.AreEqual(newSampleTile2.GetNextTile(Direction.E), neighbors[0]);
         Assert.AreEqual(newSampleTile2.GetNextTile(Direction.NE), neighbors[1]);
-        Assert.AreEqual(null, neighbors[2]);
-        Assert.AreEqual(null, neighbors[3]);
-        Assert.AreEqual(null, neighbors[4]);
-        Assert.AreEqual(null, neighbors[5]);
 
         WorldTile newSampleTile3 = new WorldTile(world, 74, 0);
         neighbors = newSampleTile3.GetNeighbors();
-        Assert.AreEqual(null, neighbors[0]);
-        Assert.AreEqual(newSampleTile3.GetNextTile(Direction.NE), neighbors[1]);
-        Assert.AreEqual(newSampleTile3.GetNextTile(Direction.NW), neighbors[2]);
-        Assert.AreEqual(newSampleTile3.GetNextTile(Direction.W), neighbors[3]);
-        Assert.AreEqual(null, neighbors[4]);
-        Assert.AreEqual(null, neighbors[5]);
+        Assert.AreEqual(3, neighbors.Count);
+        Assert.AreEqual(newSampleTile3.GetNextTile(Direction.NE), neighbors[0]);
+        Assert.AreEqual(newSampleTile3.GetNextTile(Direction.NW), neighbors[1]);
+        Assert.AreEqual(newSampleTile3.GetNextTile(Direction.W), neighbors[2]);
 
         WorldTile newSampleTile4 = new WorldTile(world, 74, 49);
         neighbors = newSampleTile4.GetNeighbors();
-        Assert.AreEqual(null, neighbors[0]);
-        Assert.AreEqual(null, neighbors[1]);
-        Assert.AreEqual(null, neighbors[2]);
-        Assert.AreEqual(newSampleTile4.GetNextTile(Direction.W), neighbors[3]);
-        Assert.AreEqual(newSampleTile4.GetNextTile(Direction.SW), neighbors[4]);
-        Assert.AreEqual(null, neighbors[5]);
+        Assert.AreEqual(2, neighbors.Count);
+        Assert.AreEqual(newSampleTile4.GetNextTile(Direction.W), neighbors[0]);
+        Assert.AreEqual(newSampleTile4.GetNextTile(Direction.SW), neighbors[1]);
 
         WorldTile newSampleTile5 = new WorldTile(world, 0, 49);
         neighbors = newSampleTile5.GetNeighbors();
+        Assert.AreEqual(3, neighbors.Count);
         Assert.AreEqual(newSampleTile5.GetNextTile(Direction.E), neighbors[0]);
-        Assert.AreEqual(null, neighbors[1]);
-        Assert.AreEqual(null, neighbors[2]);
-        Assert.AreEqual(null, neighbors[3]);
-        Assert.AreEqual(newSampleTile5.GetNextTile(Direction.SW), neighbors[4]);
-        Assert.AreEqual(newSampleTile5.GetNextTile(Direction.SE), neighbors[5]);
+        Assert.AreEqual(newSampleTile5.GetNextTile(Direction.SW), neighbors[1]);
+        Assert.AreEqual(newSampleTile5.GetNextTile(Direction.SE), neighbors[2]);
     }
 
     [Test]

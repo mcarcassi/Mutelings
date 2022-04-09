@@ -8,6 +8,6 @@ namespace Assets.GameLogic
 {
     public enum Direction
     {
-        NE,E,SE,SW,W,NW
+        E,NE,NW,W,SW,SE
     }
 }

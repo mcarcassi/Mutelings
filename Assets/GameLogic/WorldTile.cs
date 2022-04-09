@@ -273,12 +273,14 @@ namespace Assets.GameLogic
         public List<WorldTile> GetNeighbors()
         {
             List<WorldTile> neighbors = new List<WorldTile>();
-            neighbors.Add(GetNextTile(Direction.E));
-            neighbors.Add(GetNextTile(Direction.NE));
-            neighbors.Add(GetNextTile(Direction.NW));
-            neighbors.Add(GetNextTile(Direction.W));
-            neighbors.Add(GetNextTile(Direction.SW));
-            neighbors.Add(GetNextTile(Direction.SE));
+            foreach (Direction dir in Enum.GetValues(typeof(Direction)))
+            {
+                WorldTile tile = GetNextTile(dir);
+                if (tile != null)
+                {
+                    neighbors.Add(tile);
+                }
+            }
             return neighbors;
         }
 
