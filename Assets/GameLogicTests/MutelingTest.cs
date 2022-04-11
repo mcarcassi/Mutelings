@@ -8,11 +8,11 @@ using Assets.GameLogic;
 
 public class MutelingTest
 {
-    World world = new World(5, 5);
     // A Test behaves as an ordinary method
     [Test]
     public void MoveETest()
     {
+        World world = new World(5, 5);
         Muteling mute = new Muteling();
         world.GetTileAt(2, 2).AddObject(mute);
         mute.Move(Direction.E);
@@ -22,6 +22,7 @@ public class MutelingTest
     [Test]
     public void MoveWTest()
     {
+        World world = new World(5, 5);
         Muteling mute = new Muteling();
         world.GetTileAt(2, 2).AddObject(mute);
         mute.Move(Direction.W);
@@ -31,6 +32,7 @@ public class MutelingTest
     [Test]
     public void MoveNETest()
     {
+        World world = new World(5, 5);
         Muteling mute = new Muteling();
         world.GetTileAt(2, 2).AddObject(mute);
         mute.Move(Direction.NE);
@@ -43,6 +45,7 @@ public class MutelingTest
     [Test]
     public void MoveNWTest()
     {
+        World world = new World(5, 5);
         Muteling mute = new Muteling();
         world.GetTileAt(2, 2).AddObject(mute);
         mute.Move(Direction.NW);
@@ -54,6 +57,7 @@ public class MutelingTest
     [Test]
     public void MoveSETest()
     {
+        World world = new World(5, 5);
         Muteling mute = new Muteling();
         world.GetTileAt(2, 2).AddObject(mute);
         mute.Move(Direction.SE);
@@ -65,6 +69,7 @@ public class MutelingTest
     [Test]
     public void MoveSWTest()
     {
+        World world = new World(5, 5);
         Muteling mute = new Muteling();
         world.GetTileAt(2, 2).AddObject(mute);
         mute.Move(Direction.SW);
@@ -76,6 +81,7 @@ public class MutelingTest
     [Test]
     public void SensingTest()
     {
+        World world = new World(5, 5);
         Muteling mute1 = new Muteling();
         Muteling mute2 = new Muteling();
         Plant plant1 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
@@ -91,22 +97,13 @@ public class MutelingTest
         List<WorldTile> foodTiles2 = mute2.SenseFood(3);
 
         Assert.AreEqual(3, foodTiles1.Count);
-        Assert.AreEqual(2, foodTiles1[0].X);
-        Assert.AreEqual(2, foodTiles1[0].Y);
-        Assert.AreEqual(1, foodTiles1[1].X);
-        Assert.AreEqual(1, foodTiles1[1].Y);
-        Assert.AreEqual(4, foodTiles1[2].X);
-        Assert.AreEqual(4, foodTiles1[2].Y);
+        Assert.AreEqual(plant1.Position, foodTiles1[0]);
+        Assert.AreEqual(plant3.Position, foodTiles1[1]);
+        Assert.AreEqual(plant2.Position, foodTiles1[2]);
 
         Assert.AreEqual(2, foodTiles2.Count);
-        Assert.AreEqual(1, foodTiles2[0].X);
-        Assert.AreEqual(1, foodTiles2[0].Y);
-        Assert.AreEqual(2, foodTiles2[1].X);
-        Assert.AreEqual(2, foodTiles2[1].Y);
-
-
-
-
+        Assert.AreEqual(plant1.Position, foodTiles1[0]);
+        Assert.AreEqual(plant3.Position, foodTiles1[1]);
     }
 
 

@@ -67,16 +67,21 @@ namespace Assets.GameLogic
 
         public List<WorldTile> SenseFood(int senseRange)
         {
-            List<WorldTile> foodTiles = new List<WorldTile>();
+            return Sense(senseRange, tile => tile.Contains(typeof(Plant)));
+        }
+
+        public List<WorldTile> Sense(int senseRange, Predicate<WorldTile> condition)
+        {
+            List<WorldTile> sensedTiles = new List<WorldTile>();
             List<WorldTile> visited = new List<WorldTile>();
             List<WorldTile> fringes = new List<WorldTile>();
             List<WorldTile> neighbors = new List<WorldTile>();
             List<WorldTile> nextLayer = new List<WorldTile>();
             visited.Add(Position);
             fringes.Add(Position);
-            if (Position.Contains(typeof(Plant)))
+            if (condition.Invoke(Position))
             {
-                foodTiles.Add(Position);
+                sensedTiles.Add(Position);
             }
             for (int i = 0; i < senseRange; i++)
             {
@@ -87,9 +92,9 @@ namespace Assets.GameLogic
                     {
                         if(!visited.Contains(tile))
                         {
-                            if (tile.Contains(typeof(Plant)))
+                            if (condition.Invoke(tile))
                             { 
-                                foodTiles.Add(tile);
+                                sensedTiles.Add(tile);
                             }
                             nextLayer.Add(tile);
                             visited.Add(tile);
@@ -102,7 +107,7 @@ namespace Assets.GameLogic
 
             }
             
-            return foodTiles;
+            return sensedTiles;
         }
 
 
