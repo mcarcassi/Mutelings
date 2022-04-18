@@ -59,6 +59,7 @@ namespace Assets.GameLogic
 
         public bool RemoveResource(Resource resource)
         {
+            GrowthStage--;
             return _resources.Remove(resource);
         }
 

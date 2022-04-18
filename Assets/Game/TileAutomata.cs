@@ -25,15 +25,22 @@ public class TileAutomata : MonoBehaviour
     public Tilemap mutelingMap;
     public Tilemap plantMap;
     public Tilemap terrainMap;
+
     public Tile plantTile;
+    public Tile plant1Tile;
+    public Tile plant2Tile;
+    public Tile plant3Tile;
+    public Tile plant4Tile;
+
     public Tile grassTile;
     public Tile waterTile;
     public Tile mutelingTile;
+    public Tile eggTile;
 
     int width;
     int height;
 
-    public void generateWorld()
+    public void GenerateWorld()
     {
         width = tmapSize.x;
         height = tmapSize.y;
@@ -41,9 +48,9 @@ public class TileAutomata : MonoBehaviour
         world = WorldGenerator.GenerateRandomWorld(width, height);
     }
 
-    public void updateWorld()
+    public void UpdateWorld()
     {
-        clearMap(false);
+        ClearMap(false);
         for (int x = 0; x < width; x++)
         {
             for(int y = 0; y < height; y++)
@@ -60,7 +67,30 @@ public class TileAutomata : MonoBehaviour
                 {
                     if (tileObject is Plant)
                     {
-                        plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plantTile);
+                        if(currentTile.GetPlant().GrowthStage <= 1)
+                        {
+                            plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plantTile);
+                        }
+                        else if (currentTile.GetPlant().GrowthStage == 2)
+                        {
+                            plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plant1Tile);
+                        }
+                        else if (currentTile.GetPlant().GrowthStage == 3)
+                        {
+                            plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plant2Tile);
+                        }
+                        else if (currentTile.GetPlant().GrowthStage == 4)
+                        {
+                            plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plant3Tile);
+                        }
+                        else if (currentTile.GetPlant().GrowthStage >= 5)
+                        {
+                            plantMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), plant4Tile);
+                        }
+                    }
+                    if(tileObject is Egg)
+                    {
+                        mutelingMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), eggTile);
                     }
                     if (tileObject is Muteling)
                     {
@@ -72,7 +102,7 @@ public class TileAutomata : MonoBehaviour
 
     }
 
-    public int [,] genTilePos(int[,] oldMap)
+    public int [,] GenTilePos(int[,] oldMap)
     {
         int[,] newMap = new int[width, height];
         int neighb;
@@ -138,33 +168,33 @@ public class TileAutomata : MonoBehaviour
     {
         if (world == null)
         {
-            generateWorld();
-            updateWorld();
+            GenerateWorld();
+            UpdateWorld();
         }
 
         if (Input.GetMouseButtonDown(0))
         {
             world.AdvanceTime();
-            updateWorld();
+            UpdateWorld();
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             for (int i = 0; i < 5; i++)
             {
                 world.AdvanceTime();
-                updateWorld();
+                UpdateWorld();
                 
             }
         }
         if (Input.GetMouseButtonDown(1))
         {
-            clearMap(true);
+            ClearMap(true);
             world = null;
         }
 
     }
 
-    public void clearMap(bool complete)
+    public void ClearMap(bool complete)
     {
         plantMap.ClearAllTiles();
         terrainMap.ClearAllTiles();
