@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Assets.GameLogic;
-
+using System;
 
 public class MutelingTest
 {
@@ -81,6 +81,11 @@ public class MutelingTest
     [Test]
     public void SensingTest()
     {
+        // G G G G P2
+        //  G G G G G
+        // G G M1:P1 G G
+        //  G P3 G G G
+        // M2 G G G G
         World world = new World(5, 5);
         Muteling mute1 = new Muteling();
         Muteling mute2 = new Muteling();
@@ -106,5 +111,57 @@ public class MutelingTest
         Assert.AreEqual(plant3.Position, foodTiles1[1]);
     }
 
+    [Test]
+    public void IsReachable()
+    {
+        // G P4 G G G
+        //  W P3 W G G
+        // P1 W W P2 G
+        //  W G G G G
+        // G G M G G
+        World world = new World(5, 5);
+        WorldTile waterTile1 = new WorldTile(world, 0, 1);
+        WorldTile waterTile2 = new WorldTile(world, 1, 2);
+        WorldTile waterTile3 = new WorldTile(world, 2, 2);
+        WorldTile waterTile4 = new WorldTile(world, 0, 3);
+        WorldTile waterTile5 = new WorldTile(world, 2, 3);
+        world.GetTileAt(0, 1).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
+        world.GetTileAt(1, 2).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
+        world.GetTileAt(2, 2).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
+        world.GetTileAt(0, 3).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
+        world.GetTileAt(2, 3).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
 
+        Muteling mute = new Muteling();
+        Plant plant1 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
+        Plant plant2 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
+        Plant plant3 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
+        Plant plant4 = new Plant(Library.Instance.GetPlantTypeByName("Redberry Bush"));
+        world.GetTileAt(2, 0).AddObject(mute);
+
+        world.GetTileAt(0, 2).AddObject(plant1);
+        world.GetTileAt(3, 2).AddObject(plant2);
+        world.GetTileAt(1, 3).AddObject(plant3);
+        world.GetTileAt(1, 4).AddObject(plant4);
+
+        Assert.IsFalse(mute.IsReachable(3, plant1.Position));
+        Assert.IsTrue(mute.IsReachable(3, plant2.Position));
+        Assert.IsFalse(mute.IsReachable(3, plant3.Position));
+        Assert.Throws<ArgumentException>(() => mute.IsReachable(3, plant4.Position));
+
+        // G P4 G G G
+        //  W P3 W G G
+        // P1 W W P2 G
+        //  W G M G G
+        // G G G G G
+        mute.Move(Direction.NE);
+        Assert.IsFalse(mute.IsReachable(3, plant1.Position));
+        Assert.IsTrue(mute.IsReachable(3, plant2.Position));
+        Assert.IsTrue(mute.IsReachable(3, plant3.Position));
+        Assert.IsTrue(mute.IsReachable(3, plant4.Position));
+
+        //Check if detect objects on same tile as reachable
+        mute.Move(Direction.NE);
+        Assert.IsTrue(mute.IsReachable(3, plant2.Position));
+
+    }
 }
