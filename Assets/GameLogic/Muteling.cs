@@ -157,8 +157,10 @@ namespace Assets.GameLogic
         {
             double weight;
             double score = 0;
-            if (!Position.GetNextTile(dir).CanAddObject(new Muteling()))
+            // TODO Homogenize check for muteling on tile 
+            if (!Position.GetNextTile(dir).CanAddObject(this))
             {
+                // FIXME throw exception
                 return -1.0;
             }
             List<WorldTile> visited = new List<WorldTile>();
@@ -181,6 +183,7 @@ namespace Assets.GameLogic
                     neighbors = fringeTile.GetNeighbors();
                     foreach (WorldTile tile in neighbors)
                     {
+                        // TODO Homogenize check for muteling on tile 
                         if (!visited.Contains(tile) && tile.TerrainType.IsPassable && tile.DistanceFrom(Position) <= senseRange)
                         {
                             nextLayer.Add(tile);
@@ -197,7 +200,7 @@ namespace Assets.GameLogic
                 nextLayer.RemoveAll(x => true);
 
             }
-            return Math.Round(score, 3);
+            return score;
         }
     }
 }

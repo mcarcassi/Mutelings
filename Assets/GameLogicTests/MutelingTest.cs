@@ -185,17 +185,17 @@ public class MutelingTest
         world.GetTileAt(2, 2).AddObject(mute);
 
         // 1*1 + 3*0.5 + 4*0.333 = 3.833
-        Assert.AreEqual(3.833, mute.PlantScore(3, 3, Direction.E));
+        Assert.AreEqual(3.833, mute.PlantScore(3, 3, Direction.E), 0.001);
         // 1*1 + 3*0.5 + 3*0.333 = 3.5
-        Assert.AreEqual(3.5, mute.PlantScore(3, 3, Direction.NE));
+        Assert.AreEqual(3.5, mute.PlantScore(3, 3, Direction.NE), 0.001);
         // 0*1 + 1*0.5 + 3*0.333 = 1.5
-        Assert.AreEqual(1.5, mute.PlantScore(3, 3, Direction.NW));
+        Assert.AreEqual(1.5, mute.PlantScore(3, 3, Direction.NW), 0.001);
         // 0*1 + 0*0.5 + 1*0.333 = 0.333
-        Assert.AreEqual(0.333, mute.PlantScore(3, 3, Direction.W));
+        Assert.AreEqual(0.333, mute.PlantScore(3, 3, Direction.W), 0.001);
         // 0*1 + 0*2 + 0*3 = 0
-        Assert.AreEqual(0.0, mute.PlantScore(3, 3, Direction.SW));
+        Assert.AreEqual(0.0, mute.PlantScore(3, 3, Direction.SW), 0.001);
         // Invalid move
-        Assert.AreEqual(-1.0, mute.PlantScore(3, 3, Direction.SE));
+        Assert.AreEqual(-1.0, mute.PlantScore(3, 3, Direction.SE), 0.001);
 
 
     }
