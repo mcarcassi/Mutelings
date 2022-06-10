@@ -152,5 +152,52 @@ namespace Assets.GameLogic
             return false;
 
         }
+
+        public double PlantScore(int senseRange, int numSteps, Direction dir)
+        {
+            double weight;
+            double score = 0;
+            if (!Position.GetNextTile(dir).CanAddObject(new Muteling()))
+            {
+                return -1.0;
+            }
+            List<WorldTile> visited = new List<WorldTile>();
+            List<WorldTile> fringes = new List<WorldTile>();
+            List<WorldTile> neighbors = new List<WorldTile>();
+            List<WorldTile> nextLayer = new List<WorldTile>();
+            visited.Add(Position);
+            visited.Add(Position.GetNextTile(dir));
+            fringes.Add(Position.GetNextTile(dir));
+            if (Position.GetNextTile(dir).Contains(typeof(Plant)))
+            {
+                score++;
+            }
+
+            for (int i = 2; i <= numSteps; i++)
+            {
+                weight = 1.0 / i;
+                foreach (WorldTile fringeTile in fringes)
+                {
+                    neighbors = fringeTile.GetNeighbors();
+                    foreach (WorldTile tile in neighbors)
+                    {
+                        if (!visited.Contains(tile) && tile.TerrainType.IsPassable && tile.DistanceFrom(Position) <= senseRange)
+                        {
+                            nextLayer.Add(tile);
+                            visited.Add(tile);
+                            if (tile.Contains(typeof(Plant)))
+                            {
+                                score += weight;
+                            }
+                        }
+                    }
+                }
+                fringes.RemoveAll(x => true);
+                fringes.AddRange(nextLayer);
+                nextLayer.RemoveAll(x => true);
+
+            }
+            return Math.Round(score, 3);
+        }
     }
 }

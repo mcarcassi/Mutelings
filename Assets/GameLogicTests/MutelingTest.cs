@@ -112,7 +112,7 @@ public class MutelingTest
     }
 
     [Test]
-    public void IsReachable()
+    public void IsReachableTest()
     {
         // G P4 G G G
         //  W P3 W G G
@@ -120,11 +120,7 @@ public class MutelingTest
         //  W G G G G
         // G G M G G
         World world = new World(5, 5);
-        WorldTile waterTile1 = new WorldTile(world, 0, 1);
-        WorldTile waterTile2 = new WorldTile(world, 1, 2);
-        WorldTile waterTile3 = new WorldTile(world, 2, 2);
-        WorldTile waterTile4 = new WorldTile(world, 0, 3);
-        WorldTile waterTile5 = new WorldTile(world, 2, 3);
+
         world.GetTileAt(0, 1).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
         world.GetTileAt(1, 2).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
         world.GetTileAt(2, 2).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
@@ -162,6 +158,45 @@ public class MutelingTest
         //Check if detect objects on same tile as reachable
         mute.Move(Direction.NE);
         Assert.IsTrue(mute.IsReachable(3, plant2.Position));
+
+    }
+
+    [Test]
+    public void PlantScoreTest()
+    {
+        // G G G P P
+        //  G G P P P
+        // G G M P P
+        //  G G W G G
+        // G G G G P
+        World world = new World(5, 5);
+        world.GetTileAt(2, 1).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
+
+        world.GetTileAt(4, 0).AddObject(new Plant());
+        world.GetTileAt(3, 2).AddObject(new Plant());
+        world.GetTileAt(4, 2).AddObject(new Plant());
+        world.GetTileAt(2, 3).AddObject(new Plant());
+        world.GetTileAt(3, 3).AddObject(new Plant());
+        world.GetTileAt(4, 3).AddObject(new Plant());
+        world.GetTileAt(3, 4).AddObject(new Plant());
+        world.GetTileAt(4, 4).AddObject(new Plant());
+
+        Muteling mute = new Muteling();
+        world.GetTileAt(2, 2).AddObject(mute);
+
+        // 1*1 + 3*0.5 + 4*0.333 = 3.833
+        Assert.AreEqual(3.833, mute.PlantScore(3, 3, Direction.E));
+        // 1*1 + 3*0.5 + 3*0.333 = 3.5
+        Assert.AreEqual(3.5, mute.PlantScore(3, 3, Direction.NE));
+        // 0*1 + 1*0.5 + 3*0.333 = 1.5
+        Assert.AreEqual(1.5, mute.PlantScore(3, 3, Direction.NW));
+        // 0*1 + 0*0.5 + 1*0.333 = 0.333
+        Assert.AreEqual(0.333, mute.PlantScore(3, 3, Direction.W));
+        // 0*1 + 0*2 + 0*3 = 0
+        Assert.AreEqual(0.0, mute.PlantScore(3, 3, Direction.SW));
+        // Invalid move
+        Assert.AreEqual(-1.0, mute.PlantScore(3, 3, Direction.SE));
+
 
     }
 }
