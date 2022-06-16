@@ -172,6 +172,42 @@ public class MutelingTest
         World world = new World(5, 5);
         world.GetTileAt(2, 1).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
 
+        world.GetTileAt(4, 0).AddObject(new Plant(1));
+        world.GetTileAt(3, 2).AddObject(new Plant(1));
+        world.GetTileAt(4, 2).AddObject(new Plant(1));
+        world.GetTileAt(2, 3).AddObject(new Plant(1));
+        world.GetTileAt(3, 3).AddObject(new Plant(1));
+        world.GetTileAt(4, 3).AddObject(new Plant(1));
+        world.GetTileAt(3, 4).AddObject(new Plant(1));
+        world.GetTileAt(4, 4).AddObject(new Plant(1));
+
+        Muteling mute = new Muteling();
+        world.GetTileAt(2, 2).AddObject(mute);
+
+        // 1*1*1 + 3*1*0.5 + 4*1*0.333 = 3.833
+        Assert.AreEqual(3.833, mute.FoodScore(3, 3, Direction.E), 0.001);
+        // 1*1*1 + 3*1*0.5 + 3*1*0.333 = 3.5
+        Assert.AreEqual(3.5, mute.FoodScore(3, 3, Direction.NE), 0.001);
+        // 0*1*1 + 1*1*0.5 + 3*1*0.333 = 1.5
+        Assert.AreEqual(1.5, mute.FoodScore(3, 3, Direction.NW), 0.001);
+        // 0*1*1 + 0*1*0.5 + 1*1*0.333 = 0.333
+        Assert.AreEqual(0.333, mute.FoodScore(3, 3, Direction.W), 0.001);
+        // 0*1*1 + 0*1*2 + 0*1*3 = 0
+        Assert.AreEqual(0.0, mute.FoodScore(3, 3, Direction.SW), 0.001);
+        // Invalid move
+        Assert.Throws<ArgumentException>(() => mute.FoodScore(3, 3, Direction.SE));
+    }
+
+    public void DecideMoveTest()
+    {
+        // G G G P P
+        //  G G P P P
+        // G G M P P
+        //  G G W G G
+        // G G G G P
+        World world = new World(5, 5);
+        world.GetTileAt(2, 1).TerrainType = Library.Instance.GetTerrainTypeByName("Water");
+
         world.GetTileAt(4, 0).AddObject(new Plant());
         world.GetTileAt(3, 2).AddObject(new Plant());
         world.GetTileAt(4, 2).AddObject(new Plant());
@@ -184,19 +220,6 @@ public class MutelingTest
         Muteling mute = new Muteling();
         world.GetTileAt(2, 2).AddObject(mute);
 
-        // 1*1 + 3*0.5 + 4*0.333 = 3.833
-        Assert.AreEqual(3.833, mute.PlantScore(3, 3, Direction.E), 0.001);
-        // 1*1 + 3*0.5 + 3*0.333 = 3.5
-        Assert.AreEqual(3.5, mute.PlantScore(3, 3, Direction.NE), 0.001);
-        // 0*1 + 1*0.5 + 3*0.333 = 1.5
-        Assert.AreEqual(1.5, mute.PlantScore(3, 3, Direction.NW), 0.001);
-        // 0*1 + 0*0.5 + 1*0.333 = 0.333
-        Assert.AreEqual(0.333, mute.PlantScore(3, 3, Direction.W), 0.001);
-        // 0*1 + 0*2 + 0*3 = 0
-        Assert.AreEqual(0.0, mute.PlantScore(3, 3, Direction.SW), 0.001);
-        // Invalid move
-        Assert.AreEqual(-1.0, mute.PlantScore(3, 3, Direction.SE), 0.001);
-
-
+        Assert.AreEqual(Direction.E, mute.DecideMove());
     }
 }

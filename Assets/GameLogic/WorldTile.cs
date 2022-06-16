@@ -294,5 +294,10 @@ namespace Assets.GameLogic
         {
             return _objects;
         }
+
+        public override string ToString()
+        {
+            return "World tile at (" + X + "," + Y + ")";
+        }
     }
 }

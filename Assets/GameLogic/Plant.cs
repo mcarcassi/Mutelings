@@ -14,6 +14,18 @@ namespace Assets.GameLogic
         private int _growthCount = 0;
         public int GrowthStage { get; set; }
 
+        public Plant(int numResources)
+        {
+            PlantType = Library.Instance.GetPlantTypeByName("Redberry Bush");
+            _resources = new List<Resource>();
+            GrowthStage = 1;
+            for(int i = 0; i < numResources; i++)
+            {
+                Resource resource = new Resource(PlantType.ResourceType);
+                _resources.Add(resource);
+                UpdateGrowth();
+            }
+        }
         public Plant(PlantType plantType)
         {
             PlantType = plantType;
